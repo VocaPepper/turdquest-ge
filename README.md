@@ -1,27 +1,9 @@
-# TardQuest
-```
-                                                         ▄▄
-▄                                                ▄         ▀█
- ▀▀██████████████▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀██████           ▀█         █░                        ▀▀▀▀▀▀▀▀▄
-     ████░            ██████    █▀░░░█            █         █░▄███████▄     ▄█▄ ▄▄█████████▀▀▀
-     ██░░     ██████  █░░░██    █░  ██      ▄    ▄█        ██░██░░░░░▀█   ███░ █    █████░
-     ██░     ██░   █░ █████░    █░  █░ ▄█████░   █  █     ██░██████▄  ▀  ██░░       ███░░
-    ███░     ███████░ █░░███░ █░█░ ██░ █░░░██░   █  █░   ██░ █░     ▄▄    ███▄      ██░░
-    ██░      █░░░░░█░██░   ████░████░░ ▀█████░   █  ██░███░  █▄   ███░   ████▀      ██░
-     █░       ░     ░  ░       ░░░░░░       █░  ██   ███░░   ██████░░ ████░░░      ██░
-     █░                             ░     ▄██░███░    ░░░     ░░░░░████▄▄▄▄▄▄▄▄▄▄▄▄██░
-     █░                             ░     █░░██░░                 ██░░░░░░░░░░░░░░░░░
-     █░                                   ▀███░░                  █░
-     ░░                                     ░░░                   █░
-     ░                                                           ██░
-     ░                                                           █░
-     ░                                                           ░░
-     ░                                                           ░
-```
+# TurdQuest GE (Ganked Edition)
 
-# [►►► PLAY ONLINE ◄◄◄](https://milklounge.wang/tardquest)
+# [►►► PLAY ONLINE ◄◄◄](https://vocapepper.com/programs/turdquest)
 
 A Javascript dungeon crawler by [Xx_TheMilkMan69_xX](https://forum.agoraroad.com/index.php?members/8701/), [MySpace Tom](https://forum.agoraroad.com/index.php?members/3460/) and [VocaPepper](https://vocapepper.com/)
+This is the censored / non-copyright infringing version.
 
 # CREDITS
 ### PROGRAMMING + GRAPHICS
@@ -85,16 +67,3 @@ Good job, idiot. You have fallen into a dungeon and have no way out except to ge
 During battle, you can try to persuade an enemy to join you in your quest. To persuade them, you can say whatever you want. Unfortunately, the enemies don't speak your language, so your words don't actually have any influence on their decision to join you or not, but they might be swayed by your attempts. Normally, you only have two attempts per battle... though there may be a way to alleviate that problem.
 
 After an enemy has been successfully persuaded to join you in your quest, they will become an ally. Allies will help you in battle and will fight for you to the bitter death. During a given battle, an ally may use one of their turns to heal your character up to one time per fight maximum.
-
-# Notable Forks + Related Repositories
-### TheMilkMan6669's Tardquest Standalone build
-This is a desktop application build for TardQuest, which includes neat features such as a background artwork selector and a retro filter toggler.
-
-▶[tardquest-standalone](https://github.com/TheMilkMan6669/tardquest-standalone)
-
-### VocaPepper
-VocaPepper's 1.10.0 build most notably includes an online multiplayer mode (discontinued - for now).
-
-▶[Main](https://vocapepper.com/tardquest/src/multiplayer.html)
-
-▶[GitHub](https://github.com/VocaPepper/tardquest-online-legacy)
