@@ -1,9 +1,38 @@
 # TurdQuest GE (Ganked Edition)
 
+```                                                         ▄▄                                    
+▄                                                ▄         ▀█                                  
+ ▀▀██████████████▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀██████           ▀█         █░                        ▀▀▀▀▀▀▀▀▄
+     ████░            ██████    █▀░░░█            █         █░▄███████▄     ▄█▄ ▄▄█████████▀▀▀ 
+     ██░░  ▄▀▀▀▀▄▄▄   █░░░██    █░  ██      ▄    ▄█        ██░██░░░░░▀█   ███░ █    █████░     
+     ██░   █───────█  █████░    █░  █░ ▄█████░   █  █     ██░██████▄  ▀  ██░░       ███░░      
+    ███░  █─█───█──█  █░░███░ █░█░ ██░ █░░░██░   █  █░   ██░ █░     ▄▄    ███▄      ██░░       
+    ██░   █─█───█──█ ██░   ████░████░░ ▀█████░   █  ██░███░  █▄   ███░   ████▀      ██░        
+     █░  █───▀▀▀──█    ░       ░░░░░░       █░  ██   ███░░   ██████░░ ████░░░      ██░         
+     █░  █▄▄▄▄────█                 ░     ▄██░███░    ░░░     ░░░░░████▄▄▄▄▄▄▄▄▄▄▄▄██░         
+     █░       ▀▀▀▀                  ░     █░░██░░                 ██░░░░░░░░░░░░░░░░░          
+     █░                                   ▀███░░                  █░                           
+     ░░                                     ░░░                   █░  GANKED EDITION           
+     ░                                                           ██░                           
+     ░                                                           █░                            
+     ░                                                           ░░                            
+     ░                                                           ░                             
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░
+```
+
 # [►►► PLAY ONLINE ◄◄◄](https://vocapepper.com/programs/turdquest)
 
 A Javascript dungeon crawler by [Xx_TheMilkMan69_xX](https://forum.agoraroad.com/index.php?members/8701/), [MySpace Tom](https://forum.agoraroad.com/index.php?members/3460/) and [VocaPepper](https://vocapepper.com/)
-This is the censored / non-copyright infringing version.
+
+> [!NOTE]
+> This is the censored / non-copyright infringing version.
 
 # CREDITS
 ### PROGRAMMING + GRAPHICS
