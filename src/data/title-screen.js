@@ -21,32 +21,31 @@ const TITLE_SCREEN = {
 };
 
 TITLE_SCREEN.logo = Object.freeze({
-    asciiArt: `
-                                                         ▄▄
-▄                                                ▄         ▀█
+    asciiArt: `                                                         ▄▄                                    
+▄                                                ▄         ▀█                                  
  ▀▀██████████████▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀██████           ▀█         █░                        ▀▀▀▀▀▀▀▀▄
-     ████░            ██████    █▀░░░█            █         █░▄███████▄     ▄█▄ ▄▄█████████▀▀▀
-     ██░░     ██████  █░░░██    █░  ██      ▄    ▄█        ██░██░░░░░▀█   ███░ █    █████░
-     ██░     ██░   █░ █████░    █░  █░ ▄█████░   █  █     ██░██████▄  ▀  ██░░       ███░░
-    ███░     ███████░ █░░███░ █░█░ ██░ █░░░██░   █  █░   ██░ █░     ▄▄    ███▄      ██░░
-    ██░      █░░░░░█░██░   ████░████░░ ▀█████░   █  ██░███░  █▄   ███░   ████▀      ██░
-     █░       ░     ░  ░       ░░░░░░       █░  ██   ███░░   ██████░░ ████░░░      ██░
-     █░                             ░     ▄██░███░    ░░░     ░░░░░████▄▄▄▄▄▄▄▄▄▄▄▄██░
-     █░                             ░     █░░██░░                 ██░░░░░░░░░░░░░░░░░
-     █░                                   ▀███░░                  █░
-     ░░                                     ░░░                   █░
-     ░                                                           ██░
-     ░                                                           █░
-     ░                                                           ░░
-     ░                                                           ░
-     ░
-     ░
-     ░
-     ░
-     ░
-     ░
-     ░
-     ░
+     ████░            ██████    █▀░░░█            █         █░▄███████▄     ▄█▄ ▄▄█████████▀▀▀ 
+     ██░░  ▄▀▀▀▀▄▄▄   █░░░██    █░  ██      ▄    ▄█        ██░██░░░░░▀█   ███░ █    █████░     
+     ██░   █───────█  █████░    █░  █░ ▄█████░   █  █     ██░██████▄  ▀  ██░░       ███░░      
+    ███░  █─█───█──█  █░░███░ █░█░ ██░ █░░░██░   █  █░   ██░ █░     ▄▄    ███▄      ██░░       
+    ██░   █─█───█──█ ██░   ████░████░░ ▀█████░   █  ██░███░  █▄   ███░   ████▀      ██░        
+     █░  █───▀▀▀──█    ░       ░░░░░░       █░  ██   ███░░   ██████░░ ████░░░      ██░         
+     █░  █▄▄▄▄────█                 ░     ▄██░███░    ░░░     ░░░░░████▄▄▄▄▄▄▄▄▄▄▄▄██░         
+     █░       ▀▀▀▀                  ░     █░░██░░                 ██░░░░░░░░░░░░░░░░░          
+     █░                                   ▀███░░                  █░                           
+     ░░                                     ░░░                   █░  GANKED EDITION           
+     ░                                                           ██░                           
+     ░                                                           █░                            
+     ░                                                           ░░                            
+     ░                                                           ░                             
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
+     ░                                                                                         
         `.trimEnd(),
 
     build: () => {
@@ -879,7 +878,7 @@ TITLE_SCREEN.content = {
         $startGameButton.id = "startGameBtn";
         $startGameButton.innerHTML = `
             <div>Click here to begin your descent into...</div>
-            <div class="action"><b><i>The TardSpire</i></b></div>
+            <div class="action"><b><i>The TurdSpire</i></b></div>
             
             <div id="preloaderStatus" class="preloaderStatus">
                 <div id="loadingBarContainer" class="loadingBarContainer">
@@ -911,8 +910,6 @@ TITLE_SCREEN.content = {
 
 TITLE_SCREEN.credits = {
     build: () => {
-        const previewBuildUrl =
-            "https://milklounge.wang/tardquest/preview/index.html";
 
         const $credits = document.createElement("div");
         $credits.id = "credits";
@@ -936,14 +933,7 @@ TITLE_SCREEN.credits = {
                 </div>
             </div>
             <div>
-                TardQuest™ (${ new Date().getFullYear() }) ||
-                <a
-                    href="https://github.com/packardbell95/tardquest"
-                    target="_blank"
-                >GitHub</a> ||
-                <a
-                    href="${previewBuildUrl}"
-                >Preview Build</a>
+                TurdQuest™ GE (${ new Date().getFullYear() })
             </div>
         `;
 
