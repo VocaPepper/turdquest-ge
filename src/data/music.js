@@ -38,7 +38,7 @@ const TARDQUEST_MUSIC_TRACKS = Object.freeze({
             looped: true,
         },
         info: {
-            title: "Into the Tardspire",
+            title: "Into the Turdspire",
             artist: "Xx_TheMilkMan69_xX",
         },
         tags: ["exploration"],
@@ -60,7 +60,7 @@ const TARDQUEST_MUSIC_TRACKS = Object.freeze({
             looped: true,
         },
         info: {
-            title: "Tarded Warrior",
+            title: "Turded Warrior",
             artist: "endless_self",
         },
         tags: ["exploration"],
@@ -82,7 +82,7 @@ const TARDQUEST_MUSIC_TRACKS = Object.freeze({
             looped: true,
         },
         info: {
-            title: "Into the Tardspire REDUX",
+            title: "Into the Turdspire REDUX",
             artist: "Xx_TheMilkMan69_xX",
         },
         tags: ["exploration"],
