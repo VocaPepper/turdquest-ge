@@ -96,3 +96,24 @@ Good job, idiot. You have fallen into a dungeon and have no way out except to ge
 During battle, you can try to persuade an enemy to join you in your quest. To persuade them, you can say whatever you want. Unfortunately, the enemies don't speak your language, so your words don't actually have any influence on their decision to join you or not, but they might be swayed by your attempts. Normally, you only have two attempts per battle... though there may be a way to alleviate that problem.
 
 After an enemy has been successfully persuaded to join you in your quest, they will become an ally. Allies will help you in battle and will fight for you to the bitter death. During a given battle, an ally may use one of their turns to heal your character up to one time per fight maximum.
+
+# Notable Forks + Related Repositories
+### TheMilkMan6669's Tardquest Standalone build
+This is a desktop application build for TardQuest, which includes neat features such as a background artwork selector and a retro filter toggler.
+
+▶[tardquest-standalone](https://github.com/TheMilkMan6669/tardquest-standalone)
+
+### VocaPepper
+TardQuest Online - Incomplete multiplayer version
+
+▶[TardQuest Online 1.10.0](https://vocapepper.com/tardquest/src/multiplayer.html)
+
+▶[GitHub](https://github.com/VocaPepper/tardquest-online-legacy)
+
+TurdQuest Ganked Edition - A censored / non-copyright infringing version
+
+▶[TurdQuest GE](https://vocapepper.com/programs/turdquest)
+
+▶[GitHub](https://github.com/VocaPepper/turdquest-ge)
+
+
