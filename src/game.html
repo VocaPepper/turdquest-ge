@@ -21,11 +21,12 @@
         <div id="animDamageTaken"></div>
         <div id="battleLog"></div>
         <div id="topLeft">
+            <pre id="portraitArtOverlay" class="portrait-art hidden"></pre>
             <div id="minimapContainer">
                 <div id="minimapHeader" class="ui-header space-around">Dungeon Floor --</div>
                 <div id="minimap"></div>
+                <div id="minimapFooter" class="minimap-footer"></div>
             </div>
-            <pre id="portraitArtOverlay" class="portrait-art hidden"></pre>
         </div>
         <div id="inputBox">
             <input type="text" id="persuadeInput" placeholder="Say your piece...">
@@ -102,6 +103,7 @@
                     <div><span data-control="backward" data-keyboard="↓/S" data-gamepad='<img src="assets/gamepad/generic/d-down.png" alt="D-Pad Down">'></span>:</div><div>Move Backward</div>
                     <div><span data-control="turn" data-keyboard="←/A,→/D" data-gamepad='<img src="assets/gamepad/generic/d-left.png" alt="D-Pad Left">/<img src="assets/gamepad/generic/d-right.png" alt="D-Pad Right">'></span>:</div><div>Turn</div>
                     <div><span data-control="strafe" data-keyboard="Q,E" data-gamepad='<img src="assets/gamepad/generic/L1.png" alt="LB">/<img src="assets/gamepad/generic/R1.png" alt="RB">'></span>:</div><div>Strafe</div>
+                    <div><span data-control="wait" data-keyboard="Space" data-gamepad='<img src="assets/gamepad/xinput/b.png" alt="X">/<img src="assets/gamepad/playstation/circle.png" alt="SQ">'></span>:</div><div>Wait</div>
                     <div><span data-control="talk" data-keyboard="T" data-gamepad='<img src="assets/gamepad/xinput/x.png" alt="X">/<img src="assets/gamepad/playstation/square.png" alt="SQ">'></span>:</div><div>Talk</div>
                     <div><span data-control="inventory" data-keyboard="I" data-gamepad='<img src="assets/gamepad/xinput/y.png" alt="Y">/<img src="assets/gamepad/playstation/triangle.png" alt="T">'></span>:</div><div>Inventory</div>
                     <div><span data-control="menu" data-keyboard="Esc" data-gamepad='<img src="assets/gamepad/xinput/start.png" alt="Menu">/<img src="assets/gamepad/playstation/start.png" alt="MenuPS">'></span>:</div><div>Game Menu</div>
@@ -136,6 +138,7 @@
             <div id="animTorch" class="offscreen"></div>
             <div id="animTrombone" class="offscreen"></div>
             <div id="animBattleTransition" class="offscreen"></div>
+            <div id="animBoulderHit" class="fixed"></div>
             <div id="menu"></div>
             <div id="mouseControl">
                 <div class="navigation">
@@ -293,6 +296,17 @@
                                 </div>
                             '
                             onclick="move('strafeRight')"
+                        ></button>
+                        <button
+                            name="wait"
+                            onclick="wait()"
+                            data-tooltipgroupid="playerInput"
+                            data-tooltipposition="left"
+                            data-tooltiphtml='
+                                <div class="genericTooltip">
+                                    Wait for a moment...
+                                </div>
+                            '
                         ></button>
                     </div>
                 </div>
@@ -4190,6 +4204,570 @@
                 ],
             },
 
+            boulder: {
+                relativeColor: { r: 199, g: 111, b: 40 },
+                positions: {
+                    p0_0: {
+                        artIndex: 0,
+                        drawAt: { x: -28, y: 7 },
+                    },
+                    p0_2: {
+                        artIndex: 0,
+                        drawAt: { x: 45, y: 7 },
+                    },
+                    p1_0: {
+                        artIndex: 0,
+                        drawAt: { x: -25, y: 4 },
+                    },
+                    p1_1: {
+                        artIndex: 0,
+                        drawAt: { x: 7, y: 4 },
+                    },
+                    p1_2: {
+                        artIndex: 0,
+                        drawAt: { x: 39, y: 4 },
+                    },
+                    p2_0: {
+                        artIndex: 1,
+                        drawAt: { x: -7, y: 9 },
+                    },
+                    p2_1: {
+                        artIndex: 1,
+                        drawAt: { x: 3, y: 9 },
+                    },
+                    p2_2: {
+                        artIndex: 2,
+                        drawAt: { x: 16, y: 9 },
+                    },
+                    p2_3: {
+                        artIndex: 3,
+                        drawAt: { x: 30, y: 9 },
+                    },
+                    p2_4: {
+                        artIndex: 3,
+                        drawAt: { x: 42, y: 9 },
+                    },
+                    p3_0: {
+                        artIndex: 4,
+                        drawAt: { x: -9, y: 15 },
+                    },
+                    p3_1: {
+                        artIndex: 4,
+                        drawAt: { x: -3, y: 11 },
+                    },
+                    p3_2: {
+                        artIndex: 4,
+                        drawAt: { x: 8, y: 11 },
+                    },
+                    p3_3: {
+                        artIndex: 5,
+                        drawAt: { x: 20, y: 11 },
+                    },
+                    p3_4: {
+                        artIndex: 6,
+                        drawAt: { x: 29, y: 11 },
+                    },
+                    p3_5: {
+                        artIndex: 6,
+                        drawAt: { x: 36, y: 11 },
+                    },
+                    p3_6: {
+                        artIndex: 6,
+                        drawAt: { x: 46, y: 12 },
+                    },
+                    p4_0: {
+                        artIndex: 7,
+                        drawAt: { x: 2, y: 12 },
+                    },
+                    p4_1: {
+                        artIndex: 7,
+                        drawAt: { x: 7, y: 12 },
+                    },
+                    p4_2: {
+                        artIndex: 7,
+                        drawAt: { x: 12, y: 12 },
+                    },
+                    p4_3: {
+                        artIndex: 7,
+                        drawAt: { x: 17, y: 12 },
+                    },
+                    p4_4: {
+                        artIndex: 7,
+                        drawAt: { x: 22, y: 12 },
+                    },
+                    p4_5: {
+                        artIndex: 7,
+                        drawAt: { x: 26, y: 12 },
+                    },
+                    p4_6: {
+                        artIndex: 7,
+                        drawAt: { x: 30, y: 12 },
+                    },
+                    p4_7: {
+                        artIndex: 7,
+                        drawAt: { x: 35, y: 12 },
+                    },
+                    p4_8: {
+                        artIndex: 7,
+                        drawAt: { x: 40, y: 12 },
+                    },
+                    p5_0: {
+                        artIndex: 8,
+                        drawAt: { x: 14, y: 13 },
+                    },
+                    p5_1: {
+                        artIndex: 8,
+                        drawAt: { x: 16, y: 13 },
+                    },
+                    p5_2: {
+                        artIndex: 8,
+                        drawAt: { x: 18, y: 13 },
+                    },
+                    p5_3: {
+                        artIndex: 8,
+                        drawAt: { x: 20, y: 13 },
+                    },
+                    p5_4: {
+                        artIndex: 8,
+                        drawAt: { x: 22, y: 13 },
+                    },
+                    p5_5: {
+                        artIndex: 8,
+                        drawAt: { x: 24, y: 13 },
+                    },
+                    p5_6: {
+                        artIndex: 8,
+                        drawAt: { x: 26, y: 13 },
+                    },
+                    p5_7: {
+                        artIndex: 8,
+                        drawAt: { x: 28, y: 13 },
+                    },
+                    p5_8: {
+                        artIndex: 8,
+                        drawAt: { x: 30, y: 13 },
+                    },
+                    p5_9: {
+                        artIndex: 8,
+                        drawAt: { x: 32, y: 13 },
+                    },
+                    p5_10: {
+                        artIndex: 8,
+                        drawAt: { x: 34, y: 13 },
+                    },
+                },
+                art: [
+                    {
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%▄▄▄▄▄▄▄▄▄▄▄▄▄%%%%%%%%%%
+                            %%%%%%%%%%▄▀             ▀▄%%%%%%%%
+                            %%%%%%%%▄▀    ███    ███   ▀▄%%%%%%
+                            %%%%%%▄▀      ▀▀▀    ▀▀▀     ▀▄%%%%
+                            %%%%▄▀                         ▀▄%%
+                            %%%%█                           █%%
+                            %%%%█                           █%%
+                            %%%%█                           █%%
+                            %%%%█                           █%%
+                            %%%%█            ███            █%%
+                            %%%%▀▄           ▀▀▀           ▄▀%%
+                            %%%%%%▀▄                     ▄▀%%%%
+                            %%%%%%%%▀▄                 ▄▀%%%%%%
+                            %%%%%%%%%%▀▄             ▄▀%%%%%%%%
+                            %%%%%%%%%%%%▀▀▀▀▀▀▀▀▀▀▀▀▀%%%%%%%%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%
+                            %%%%▄▀▀▀▀▀▀▀▄%%%
+                            %%▄▀         ▀▄%
+                            %█             █
+                            %█   ▄▄   ▄▄   █
+                            %█   ▀▀   ▀▀   █
+                            %%▀▄         ▄▀%
+                            %%%%▀▄▄▄▄▄▄▄▀%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%
+                            %%%%▄▀▀▀▀▀▀▀▄%%%
+                            %%▄▀         ▀▄%
+                            %█             █
+                            %█   ▄▄   ▄▄   █
+                            %█   ▀▀   ▀▀   █
+                            %%▀▄         ▄▀%
+                            %%%%▀▄▄▄▄▄▄▄▀%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%
+                            %%%%%%%%%%%%%%%%
+                            %%%%▄▀▀▀▀▀▀▀▄%%%
+                            %%▄▀         ▀▄%
+                            %█             █
+                            %█   ▄▄   ▄▄   █
+                            %█   ▀▀   ▀▀   █
+                            %%▀▄         ▄▀%
+                            %%%%▀▄▄▄▄▄▄▄▀%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%
+                            %%%%%%%%%%%%%
+                            %%%▄▄▄%%%%%%%
+                            %▄▀ ▄ ▀▄%%%%%
+                            %█     █%%%%%
+                            %%▀▄▄▄▀%%%%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%
+                            %%%%%%%%%%%%%
+                            %%%▄▄▄%%%%%%%
+                            %▄▀ ▄ ▀▄%%%%%
+                            %█     █%%%%%
+                            %%▀▄▄▄▀%%%%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%
+                            %%%%%%%%%%%%%
+                            %%%▄▄▄%%%%%%%
+                            %▄▀ ▄ ▀▄%%%%%
+                            %█     █%%%%%
+                            %%▀▄▄▄▀%%%%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%
+                            %%▄▄%%
+                            %█ ∞█%
+                            %▀▄▄▀%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        data: `
+                            %
+                            @%
+                        `,
+                    },
+                ],
+            },
+
+            roamingEnemy: {
+                relativeColor: { r: 255, g: 0, b: 0 }, // Red color
+                positions: {
+                    p0_0: {
+                        artIndex: 0,
+                        drawAt: { x: -28, y: 7 },
+                    },
+                    p0_2: {
+                        artIndex: 0,
+                        drawAt: { x: 45, y: 7 },
+                    },
+                    p1_0: {
+                        artIndex: 0,
+                        drawAt: { x: -25, y: 4 },
+                    },
+                    p1_1: {
+                        artIndex: 0,
+                        drawAt: { x: 7, y: 4 },
+                    },
+                    p1_2: {
+                        artIndex: 0,
+                        drawAt: { x: 39, y: 4 },
+                    },
+                    p2_0: {
+                        artIndex: 1,
+                        drawAt: { x: -7, y: 9 },
+                    },
+                    p2_1: {
+                        artIndex: 1,
+                        drawAt: { x: 3, y: 9 },
+                    },
+                    p2_2: {
+                        artIndex: 2,
+                        drawAt: { x: 16, y: 9 },
+                    },
+                    p2_3: {
+                        artIndex: 3,
+                        drawAt: { x: 30, y: 9 },
+                    },
+                    p2_4: {
+                        artIndex: 3,
+                        drawAt: { x: 42, y: 9 },
+                    },
+                    p3_0: {
+                        artIndex: 4,
+                        drawAt: { x: -9, y: 15 },
+                    },
+                    p3_1: {
+                        artIndex: 4,
+                        drawAt: { x: -3, y: 11 },
+                    },
+                    p3_2: {
+                        artIndex: 4,
+                        drawAt: { x: 8, y: 11 },
+                    },
+                    p3_3: {
+                        artIndex: 5,
+                        drawAt: { x: 20, y: 11 },
+                    },
+                    p3_4: {
+                        artIndex: 6,
+                        drawAt: { x: 29, y: 11 },
+                    },
+                    p3_5: {
+                        artIndex: 6,
+                        drawAt: { x: 36, y: 11 },
+                    },
+                    p3_6: {
+                        artIndex: 6,
+                        drawAt: { x: 46, y: 12 },
+                    },
+                    p4_0: {
+                        artIndex: 7,
+                        drawAt: { x: 2, y: 12 },
+                    },
+                    p4_1: {
+                        artIndex: 7,
+                        drawAt: { x: 7, y: 12 },
+                    },
+                    p4_2: {
+                        artIndex: 7,
+                        drawAt: { x: 12, y: 12 },
+                    },
+                    p4_3: {
+                        artIndex: 7,
+                        drawAt: { x: 17, y: 12 },
+                    },
+                    p4_4: {
+                        artIndex: 7,
+                        drawAt: { x: 22, y: 12 },
+                    },
+                    p4_5: {
+                        artIndex: 7,
+                        drawAt: { x: 26, y: 12 },
+                    },
+                    p4_6: {
+                        artIndex: 7,
+                        drawAt: { x: 30, y: 12 },
+                    },
+                    p4_7: {
+                        artIndex: 7,
+                        drawAt: { x: 35, y: 12 },
+                    },
+                    p4_8: {
+                        artIndex: 7,
+                        drawAt: { x: 40, y: 12 },
+                    },
+                    p5_0: {
+                        artIndex: 8,
+                        drawAt: { x: 14, y: 13 },
+                    },
+                    p5_1: {
+                        artIndex: 8,
+                        drawAt: { x: 16, y: 13 },
+                    },
+                    p5_2: {
+                        artIndex: 8,
+                        drawAt: { x: 18, y: 13 },
+                    },
+                    p5_3: {
+                        artIndex: 8,
+                        drawAt: { x: 20, y: 13 },
+                    },
+                    p5_4: {
+                        artIndex: 8,
+                        drawAt: { x: 22, y: 13 },
+                    },
+                    p5_5: {
+                        artIndex: 8,
+                        drawAt: { x: 24, y: 13 },
+                    },
+                    p5_6: {
+                        artIndex: 8,
+                        drawAt: { x: 26, y: 13 },
+                    },
+                    p5_7: {
+                        artIndex: 8,
+                        drawAt: { x: 28, y: 13 },
+                    },
+                    p5_8: {
+                        artIndex: 8,
+                        drawAt: { x: 30, y: 13 },
+                    },
+                    p5_9: {
+                        artIndex: 8,
+                        drawAt: { x: 32, y: 13 },
+                    },
+                    p5_10: {
+                        artIndex: 8,
+                        drawAt: { x: 34, y: 13 },
+                    },
+                },
+                art: [
+                    {
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                            %%%%%%▄▄▄%%%%%%%%▄%%%%%%%%%%%%%%%%%
+                            %%%%%%%█▀▀▄%%%%▄█%%%%%%%▄▄▄▄▄%%%%%%
+                            %%%%%%%█   █%▄█ ▀▀▄%%%▄▀ ▄▄▀%%%%%%%
+                            %%%%%%█     █     █%%▄▀ ▄▀%%%%%%%%%
+                            %%%%%%%█   █      ▀▄▀  ▄▀%%%%%%%%%%
+                            %%%%%%%%█              █%%%%%%%%%%%
+                            %%%%▄▄%█                █%%%%%%%%%%
+                            %%%%%%█                  █%%%%%%%%%
+                            %%%%%%%█                  █%%%%%%%%
+                            %%%%%%█                  █%%%%%%%%%
+                            %%%%%█                  █%%%%%%%%%%
+                            %%%%█                    █%%%%%%%%%
+                            %%%%%█  ▄▄▄           ▄▄▄ ▀▄%%%%%%%
+                            %%%%█    █             █    █%%%%%%
+                            %%%█          ▄▄▄▄▄▄▄▄▄      █%%%%%
+                            %%%█             ▀  ▀         █%%%%
+                            %%%█                ▀          █%%%
+                            %%%▀▄               ▀         ▄▀%%%
+                            %%%%%▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀%%%%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%█%%%%%%%%%%%%
+                            %%█ █%%█%%%▄▀%%%
+                            %%█ █%█ █%%█%%%%
+                            %▄▀  ▀   ▀▄█%%%%
+                            %█         ▀▄%%%
+                            %█          ▀▄%%
+                            ▄▀▄▄▄     ▄▄▄▀▄%
+                            █  ▀  ▄▄▄▄ ▀  ▀▄
+                            █              █
+                            %▀▄▄▄▄▄▄▄▄▄▄▄▄▀%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%█%%%%%%%%%%%%
+                            %%█ █%%█%%%▄▀%%%
+                            %%█ █%█ █%%█%%%%
+                            %▄▀  ▀   ▀▄█%%%%
+                            %█         ▀▄%%%
+                            %█          ▀▄%%
+                            ▄▀▄▄▄     ▄▄▄▀▄%
+                            █  ▀  ▄▄▄▄ ▀  ▀▄
+                            █              █
+                            %▀▄▄▄▄▄▄▄▄▄▄▄▄▀%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%█%%%%%%%%%%%%
+                            %%█ █%%█%%%▄▀%%%
+                            %%█ █%█ █%%█%%%%
+                            %▄▀  ▀   ▀▄█%%%%
+                            %█         ▀▄%%%
+                            %█          ▀▄%%
+                            ▄▀▄▄▄     ▄▄▄▀▄%
+                            █  ▀  ▄▄▄▄ ▀  ▀▄
+                            █              █
+                            %▀▄▄▄▄▄▄▄▄▄▄▄▄▀%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%
+                            %%%%▄%%%%%%%%
+                            %%%█ ▀▀▄%▄%%%
+                            %%%█    ▀ █%%
+                            %%%█ T  T █%%
+                            %%%▀▄▄▄▄▄▄▀%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%
+                            %%%%▄%%%%%%%%
+                            %%%█ ▀▀▄%▄%%%
+                            %%%█    ▀ █%%
+                            %%%█ T  T █%%
+                            %%%▀▄▄▄▄▄▄▀%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%%%%%%%%
+                            %%%%▄%%%%%%%%
+                            %%%█ ▀▀▄%▄%%%
+                            %%%█    ▀ █%%
+                            %%%█ T  T █%%
+                            %%%▀▄▄▄▄▄▄▀%%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%%
+                            %█▄▄%%
+                            %█TT█%
+                            %█▄▄█%
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        data: `
+                            %
+                            @%
+                        `,
+                    },
+                ],
+            },
+
             exit: {
                 positions: {
                     p0_0: {
@@ -6457,8 +7035,13 @@
                             gridCell.push({ type: "vampire" });
                         } else if (pigeon.isAt(tx, ty)) {
                             gridCell.push({ type: "pigeon" });
+                        } else if (roamingEnemies.isAt(tx, ty)) {
+                            gridCell.push({ type: "roamingEnemy" });
                         }
-
+                        // Trap check
+                        if (boulder.isAt(tx, ty)) {
+                            gridCell.push({ type: "boulder" });
+                        }
                         row.push(gridCell);
                     }
 
@@ -6917,6 +7500,15 @@
                         ? $button.removeAttribute("disabled")
                         : $button.setAttribute("disabled", "true")
                     );
+
+                // Wait functionality - always enabled during exploration
+                const waitEnabled = controlsEnabled;
+                $playerInput.querySelector('[name="wait"]')
+                    ?.removeAttribute("disabled");
+                if (!waitEnabled) {
+                    $playerInput.querySelector('[name="wait"]')
+                        ?.setAttribute("disabled", "true");
+                }
             },
 
             updateMenuControls: () => {
@@ -7084,6 +7676,7 @@
                         return true;
                     },
                     merchantStockChance: 0.9,
+                    chestDrop: true,
                     weight: 0.4,
                     price: 10,
                 },
@@ -7115,6 +7708,7 @@
                         return true;
                     },
                     merchantStockChance: 0.6,
+                    chestDrop: true,
                     weight: 0.8,
                     price: 20,
                 },
@@ -7137,6 +7731,7 @@
                         return true;
                     },
                     merchantStockChance: .4,
+                    chestDrop: true,
                     weight: 1.2,
                     price: 30,
                 },
@@ -7161,6 +7756,7 @@
                         return true;
                     },
                     merchantStockChance: .35,
+                    chestDrop: true,
                     weight: 1.5,
                     price: 45,
                 },
@@ -7203,6 +7799,7 @@
                         return true;
                     },
                     merchantStockChance: 0.8,
+                    chestDrop: true,
                     weight: 1.2,
                     price: 15,
                 },
@@ -7235,6 +7832,7 @@
                         return true;
                     },
                     merchantStockChance: 0.8,
+                    chestDrop: true,
                     weight: 0.9,
                     price: 40,
                 },
@@ -7335,6 +7933,7 @@
                         return true;
                     },
                     merchantStockChance: 0.7,
+                    chestDrop: true,
                     weight: 2,
                     price: 120,
                 },
@@ -7389,6 +7988,7 @@
                         return true;
                     },
                     merchantStockChance: 1.0,
+                    chestDrop: true,
                     weight: 1.3,
                     price: 5,
                 },
@@ -7411,7 +8011,7 @@
                         return false;
                     },
                     merchantStockChance: 1,
-                    chestChance: 0,
+                    chestDrop: false,
                     weight: 1,
                     price: 10,
                 },
@@ -7613,11 +8213,11 @@
                     name: "RING OF SEXY UNDERWEAR",
                     description:
                         "A ring with an engraving of a pair of strangely " +
-                        "attractive undergarments. +3 PRS",
-                    effects: { persuasion: 3 },
+                        "attractive undergarments. +5 PRS",
+                    effects: { persuasion: 5 },
                     price: 60,
                     merchantStockChance: 0.5,
-                    chestChance: 0.1,
+                    chestDrop: true,
                     weight: 1,
                 },
 
@@ -7626,11 +8226,11 @@
                     name: "FRENCHLY ACCENTED RING",
                     description:
                         "A ring that somehow magically forces you to speak " +
-                        "in a French accent. VERY sexy! +5 PRS",
-                    effects: { persuasion: 5 },
+                        "in a French accent. VERY sexy! +7 PRS",
+                    effects: { persuasion: 7 },
                     price: 100,
                     merchantStockChance: 0.3,
-                    chestChance: 0.04,
+                    chestDrop: true,
                     weight: 1,
                 },
 
@@ -7645,7 +8245,7 @@
                     effects: { maxHp: 5 },
                     price: 60,
                     merchantStockChance: 0.5,
-                    chestChance: 0.07,
+                    chestDrop: true,
                     weight: 1,
                 },
                 ringBloodstream: {
@@ -7657,7 +8257,7 @@
                     effects: { maxHp: 8 },
                     price: 100,
                     merchantStockChance: 0.3,
-                    chestChance: 0.04,
+                    chestDrop: true,
                     weight: 1,
                 },
 
@@ -7671,7 +8271,7 @@
                     effects: { defense: 2 },
                     price: 60,
                     merchantStockChance: 0.4,
-                    chestChance: 0.07,
+                    chestDrop: true,
                     weight: 1,
                 },
                 ringPectoralPiercing: {
@@ -7683,7 +8283,7 @@
                     effects: { defense: 5 },
                     price: 100,
                     merchantStockChance: 0.3,
-                    chestChance: 0.04,
+                    chestDrop: true,
                     weight: 1,
                 },
 
@@ -7698,7 +8298,7 @@
                     effects: { speed: 1 },
                     price: 60,
                     merchantStockChance: 0.4,
-                    chestChance: 0.07,
+                    chestDrop: true,
                     weight: 1,
                 },
                 ringCrack: {
@@ -7709,7 +8309,7 @@
                     effects: { speed: 2 },
                     price: 100,
                     merchantStockChance: 0.3,
-                    chestChance: 0.04,
+                    chestDrop: true,
                     weight: 1,
                 },
 
@@ -7719,11 +8319,11 @@
                     name: "GAMBLER'S RING",
                     description:
                         "A cheap looking ring with a 240p image of a slot " +
-                        "machine on it. +2 LUK",
-                    effects: { luck: 2 },
+                        "machine on it. +5 LUK",
+                    effects: { luck: 5 },
                     price: 150,
                     merchantStockChance: 0.1,
-                    chestChance: 0.05,
+                    chestDrop: true,
                     weight: 1,
                 },
                 ringEscobar: {
@@ -7735,7 +8335,7 @@
                     effects: { luck: 4 },
                     price: 200,
                     merchantStockChance: 0.07,
-                    chestChance: 0.02,
+                    chestDrop: true,
                     weight: 1,
                 },
 
@@ -7750,7 +8350,7 @@
                     effects: {},
                     price: 180,
                     merchantStockChance: 0.2,
-                    chestChance: 0.0,
+                    chestDrop: false,
                     weight: 2,
                 },
                 ringOfStinky: {
@@ -7758,12 +8358,12 @@
                     name: "RING OF STINKY",
                     description:
                         "A ring so stinky, SO putrid, that even monsters " +
-                        "will reconsider confronting you. Reduces encounter " +
-                        "rate by 30%",
+                        "will reconsider confronting you. Causes enemies" +
+                        "to move away from you more often.",
                     effects: {},
                     price: 200,
                     merchantStockChance: 0.2,
-                    chestChance: 0.0,
+                    chestDrop: false,
                     weight: 2,
                 },
                 ringOfAmplifiedAudio: {
@@ -7771,11 +8371,11 @@
                     name: "RING OF AMPLIFIED AUDIO",
                     description:
                         "A ring with a tiny, yet deceptively loud megaphone. " +
-                        "Miniphone? idk. +2 PRS and a PRS attempt",
-                    effects: { persuasion: 2 },
+                        "Miniphone? idk. +10 PRS and a PRS attempt",
+                    effects: { persuasion: 10 },
                     price: 130,
                     merchantStockChance: 0.2,
-                    chestChance: 0.00,
+                    chestDrop: false,
                     weight: 2,
                 },
             }),
@@ -7841,8 +8441,7 @@
             exp: 0,
             level: 1,
             stepsTakenOnCurrentFloor: 0,
-            stepsSinceLastBattle: 0, // Add this property
-            lastNearbyNPCs: new Set(), // Add this property
+            lastNearbyNPCs: new Set(),
             inCombat: false,
             isHoldingTorch: false,
             enteringCombat: false,
@@ -7883,7 +8482,7 @@
                 player.steppingOnHealingTile = false;
             },
             enterCombat: () => {
-                pauseAmbientSfx();  
+                pauseAmbientSfx();
                 persuasionAttempts = 0;
                 maxPersuasionAttempts = getEffectiveStat("persuasionAttempts");
                 player.enteringCombat = true;
@@ -7891,17 +8490,26 @@
                 player.party.prepareForBattle();
                 GameControl.update();
                 InventorySidebar.enterCombat();
+
+                // Pause boulder movement during combat
+                if (boulder.isActiveOnFloor) {
+                    boulder.lastMoveTime = performance.now();
+                }
             },
             leaveCombat: () => {
                 player.leavingCombat = true;
                 player.inCombat = false;
                 currentEnemy = null;
-                player.stepsSinceLastBattle = 0;
                 music.resumeTag("exploration");
                 player.party.purgeDeadMembers();
                 GameControl.update();
                 InventorySidebar.leaveCombat();
                 resumeAmbientSfx();
+
+                // Resume boulder movement after combat
+                if (boulder.isActiveOnFloor) {
+                    boulder.lastMoveTime = performance.now();
+                }
             },
             heal: (hp) => {
                 player.hp = Math.min(getEffectiveStat('maxHp'), player.hp + hp);
@@ -7926,6 +8534,9 @@
                 if (player.hp <= 0) {
                     GameControl.disableControls();
                     gameOver = true;
+                    animTorchEnd();
+                    const deathPortrait = currentEnemy?.id === "vampire" ? "deathVampire" : "death";
+                    Portrait.show(deathPortrait);
                 }
             },
             getEffectiveStats: () => {
@@ -8877,7 +9488,7 @@
                 const luckFloor = Math.max(luckMod - 0.5, 0);
                 const luckBoost = luckFloor + (Math.random() * luckMod);
                 const floorDeboost = floor * 0.05;
-                const modifier = 1.2 - floorDeboost + luckBoost;
+                const modifier = 1.5 - floorDeboost + luckBoost;
                 const calculatedSteps =
                     Math.max(Math.round(optimalPathLength * modifier), 10);
                 const steps = Math.max(calculatedSteps, optimalPathLength);
@@ -8996,6 +9607,7 @@
             },
             encounteredPlayer: function() {
                 return (
+                    ! gameOver &&
                     vampire.isActiveOnFloor &&
                     vampire.x === player.x &&
                     vampire.y === player.y
@@ -9318,6 +9930,347 @@
             },
         };
 
+        const boulder = {
+            isActiveOnFloor: false,
+            x: null,
+            y: null,
+            direction: null,
+            movingDirection: 1,
+            hallwayBounds: { start: null, end: null },
+            lastMoveTime: 0,
+            moveInterval: 500, // Time in ms between boulder movements
+
+            isAt: function(x, y) {
+                return boulder.isActiveOnFloor && boulder.x === x && boulder.y === y;
+            },
+
+            location: function() {
+                return boulder.isActiveOnFloor ? { x: boulder.x, y: boulder.y } : null;
+            },
+
+            isOccupiedCell: function(x, y) {
+                const cell = MAP.getCell(x, y);
+                const mapEntrance = MAP.getEntrance();
+                const isEntrance = mapEntrance.x === x && mapEntrance.y === y;
+
+                return (
+                    cell.isSolid ||
+                    ! cell.canBeRolledOverByBouldingBall ||
+                    isEntrance ||
+                    merchant.isAt(x, y) ||
+                    gambler.isAt(x, y) ||
+                    erok.isAt(x, y) ||
+                    vampire.isAt(x, y) ||
+                    pigeon.isAt(x, y)
+                );
+            },
+
+            findSuitableHallway: function() {
+                const hallways = [];
+
+                // Check player floor spawn position
+                const playerSpawn = MAP.getEntrance();
+
+                // Scan map for valid hallways
+                for (let y = 1; y < HEIGHT - 1; y++) {
+                    for (let x = 1; x < WIDTH - 1; x++) {
+                        const cell = MAP.getCell(x, y);
+                        if (cell?.type !== 'floor') continue;
+
+                        let horizontalLength = 0;
+                        let startX = x;
+
+                        while (startX + horizontalLength < WIDTH - 1) {
+                            const cx = startX + horizontalLength;
+                            const occupied = boulder.isOccupiedCell(cx, y);
+                            if (occupied) {
+                                break;
+                            }
+
+                            horizontalLength++;
+                        }
+
+                        if (horizontalLength >= 4) { // Amount of spaces in a hallway required for a boulder to spawn
+                            // Check if player spawn point is in this horizontal hallway
+                            const playerInHallway = playerSpawn &&
+                                playerSpawn.y === y &&
+                                playerSpawn.x >= startX &&
+                                playerSpawn.x < startX + horizontalLength;
+
+                            if (!playerInHallway) {
+                                let hasNPCs = false;
+                                for (let checkX = startX; checkX < startX + horizontalLength; checkX++) {
+                                    hasNPCs = boulder.isOccupiedCell(checkX, y);
+                                    if (hasNPCs) {
+                                        break;
+                                    }
+                                }
+
+                                if (!hasNPCs) {
+                                    hallways.push({
+                                        direction: 'horizontal',
+                                        start: { x: startX, y: y },
+                                        end: { x: startX + horizontalLength - 1, y: y },
+                                        length: horizontalLength
+                                    });
+                                }
+                            }
+                        }
+
+                        let verticalLength = 0;
+                        let startY = y;
+
+                        while (startY + verticalLength < HEIGHT - 1) {
+                            const cy = startY + verticalLength;
+                            const occupied = boulder.isOccupiedCell(x, cy);
+                            if (occupied) {
+                                break;
+                            }
+
+                            verticalLength++;
+                        }
+
+                        if (verticalLength >= 4) { // Amount of spaces in a hallway required for a boulder to spawn
+                            // Check if player spawn point is in this vertical hallway
+                            const playerInHallway = playerSpawn &&
+                                playerSpawn.x === x &&
+                                playerSpawn.y >= startY &&
+                                playerSpawn.y < startY + verticalLength;
+
+                            if (!playerInHallway) {
+                                let hasNPCs = false;
+                                for (let checkY = startY; checkY < startY + verticalLength; checkY++) {
+                                    hasNPCs = boulder.isOccupiedCell(x, checkY);
+                                    if (hasNPCs) {
+                                        break;
+                                    }
+                                }
+
+                                if (!hasNPCs) {
+                                    hallways.push({
+                                        direction: 'vertical',
+                                        start: { x: x, y: startY },
+                                        end: { x: x, y: startY + verticalLength - 1 },
+                                        length: verticalLength
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return hallways.length > 0 ? randomEntry(hallways) : null;
+            },
+
+            spawn: function() {
+                const hallway = boulder.findSuitableHallway();
+                if (!hallway) {
+                    boulder.isActiveOnFloor = false;
+                    return;
+                }
+
+                boulder.isActiveOnFloor = true;
+                boulder.direction = hallway.direction;
+                boulder.hallwayBounds = { start: hallway.start, end: hallway.end };
+                boulder.movingDirection = 1;
+
+                // Start at one end of the hallway
+                boulder.x = hallway.start.x;
+                boulder.y = hallway.start.y;
+                boulder.lastMoveTime = performance.now();
+
+                // Create bypass gaps in the walls adjacent to the boulder's path
+                boulder.createBypassGaps(hallway);
+
+                updateBattleLog('<span class="action">You sense the presence of a large object rolling about...</span>');
+            },
+
+            createBypassGaps: function(hallway) {
+                const gapSize = 1; // How many wall tiles can be removed to create a gap
+
+                if (hallway.direction === 'horizontal') {
+                    // Create gaps for horizontal hallways
+                    const midPoint = Math.floor((hallway.start.x + hallway.end.x) / 2);
+                    for (let i = 0; i < gapSize; i++) {
+                        const gapX = midPoint + i;
+                        const gapY = hallway.start.y - 1;
+
+                        if (gapX >= 0 && gapX < WIDTH && gapY >= 0 && gapY < HEIGHT) {
+                            const cell = MAP.getCell(gapX, gapY);
+                            // Check for void spaces
+                            const beyondY = gapY - 1;
+                            const beyondCell = MAP.getCell(gapX, beyondY);
+                            const isSafeToRemove = beyondCell && beyondCell.type === 'floor';
+
+                            if (cell?.isSolid && isSafeToRemove) {
+                                MAP.setCell(gapX, gapY, 'floor');
+                            }
+                        }
+                    }
+                    for (let i = 0; i < gapSize; i++) {
+                        const gapX = midPoint + i;
+                        const gapY = hallway.start.y + 1;
+
+                        if (gapX >= 0 && gapX < WIDTH && gapY >= 0 && gapY < HEIGHT) {
+                            const cell = MAP.getCell(gapX, gapY);
+                            // Check for void spaces
+                            const beyondY = gapY + 1;
+                            const beyondCell = MAP.getCell(gapX, beyondY);
+                            const isSafeToRemove = beyondCell && beyondCell.type === 'floor';
+
+                            if (cell?.isSolid && isSafeToRemove) {
+                                MAP.setCell(gapX, gapY, 'floor');
+                            }
+                        }
+                    }
+                } else {
+                    // Create gaps for vertical hallways
+                    const midPoint = Math.floor((hallway.start.y + hallway.end.y) / 2);
+                    for (let i = 0; i < gapSize; i++) {
+                        const gapX = hallway.start.x - 1;
+                        const gapY = midPoint + i;
+
+                        if (gapX >= 0 && gapX < WIDTH && gapY >= 0 && gapY < HEIGHT) {
+                            const cell = MAP.getCell(gapX, gapY);
+                            // Check for void spaces
+                            const beyondX = gapX - 1;
+                            const beyondCell = MAP.getCell(beyondX, gapY);
+                            const isSafeToRemove = beyondCell && beyondCell.type === 'floor';
+
+                            if (cell?.isSolid && isSafeToRemove) {
+                                MAP.setCell(gapX, gapY, 'floor');
+                            }
+                        }
+                    }
+                    for (let i = 0; i < gapSize; i++) {
+                        const gapX = hallway.start.x + 1;
+                        const gapY = midPoint + i;
+
+                        if (gapX >= 0 && gapX < WIDTH && gapY >= 0 && gapY < HEIGHT) {
+                            const cell = MAP.getCell(gapX, gapY);
+                            // Check for void spaces
+                            const beyondX = gapX + 1;
+                            const beyondCell = MAP.getCell(beyondX, gapY);
+                            const isSafeToRemove = beyondCell && beyondCell.type === 'floor';
+
+                            if (cell?.isSolid && isSafeToRemove) {
+                                MAP.setCell(gapX, gapY, 'floor');
+                            }
+                        }
+                    }
+                }
+            },
+
+            move: function() {
+                if (!boulder.isActiveOnFloor) return null;
+
+                const currentTime = performance.now();
+                if (currentTime - boulder.lastMoveTime < boulder.moveInterval) {
+                    return null;
+                }
+
+                boulder.lastMoveTime = currentTime;
+
+                let nextX = boulder.x;
+                let nextY = boulder.y;
+
+                if (boulder.direction === 'horizontal') {
+                    nextX += boulder.movingDirection;
+                } else {
+                    nextY += boulder.movingDirection;
+                }
+
+                // Check for obstacles at the next position
+                const isObstacle = boulder.isOccupiedCell(nextX, nextY);
+                if (isObstacle) {
+                    boulder.movingDirection *= -1;
+                    return null;
+                }
+
+                const enemyAtNextPosition = roamingEnemies.getEnemyAt(nextX, nextY);
+                if (enemyAtNextPosition) {
+                    roamingEnemies.killEnemy(enemyAtNextPosition.id);
+                    
+                    const writableCellTypes = [
+                        "floor", "rubble1", "rubble2", "crater", "tardspireBanner"
+                    ];
+                    
+                    const overwriteCell = writableCellTypes.includes(
+                        MAP.getCell(nextX, nextY)?.type
+                    );
+                    
+                    if (overwriteCell) {
+                        MAP.setCell(nextX, nextY, "bloodyCrater");
+                    }
+                    
+                    // Calculate distance-based scream volume
+                    const distance = Math.abs(player.x - nextX) + Math.abs(player.y - nextY);
+                    const maxRange = 10; // Max distance range
+                    const maxVolume = 1; // Max vol when closest
+                    const minVolume = 0.1; // Min vol range
+
+                    const volume = distance <= maxRange 
+                        ? Math.max(minVolume, maxVolume - ((distance - 1) / (maxRange - 1)) * (maxVolume - minVolume))
+                        : 0; // No sound if too far
+                    
+                    if (volume > 0) {
+                        playSFX('scream', volume);
+                        playSFX('boulderHit', volume);
+                    }
+                }
+
+                // If no obstacle, move to the next position
+                boulder.x = nextX;
+                boulder.y = nextY;
+
+                if (boulder.x === player.x && boulder.y === player.y) {
+                    return () => boulder.hitPlayer();
+                }
+
+                return null;
+            },
+
+            hitPlayer: function() {
+                const damage = Math.ceil(getEffectiveStat('maxHp') / 3);
+                player.damage(damage);
+                playSFX('boulderHit');
+                animBoulderHit();
+
+                updateBattleLog(
+                    `<span class="action">YEOUCH!</span> A vicious, bloodthirsty, ` +
+                    `Boulding Ball deals <span class="enemy">${damage} HP</span> to you!`
+                );
+                render();
+            },
+        };
+        function startBoulderMovement() {
+            if (boulderMovementInterval) {
+                clearInterval(boulderMovementInterval);
+            }
+
+            boulderMovementInterval = setInterval(() => {
+                // Don't move boulder during combat, animations, in menus, or game over
+                if (player.inCombat || animationActive || window._inputBlocked || menu.isOpen() || gameOver) {
+                    return;
+                }
+
+                if (boulder.isActiveOnFloor) {
+                    const result = boulder.move();
+                    if (typeof result === 'function') {
+                        result();
+                    }
+                    render();
+                }
+            }, 100);
+        }
+
+        function stopBoulderMovement() {
+            if (boulderMovementInterval) {
+                clearInterval(boulderMovementInterval);
+                boulderMovementInterval = null;
+            }
+        }
+
         const enemies = [
             {
                 id: "snailSentinel",
@@ -9509,6 +10462,271 @@
             },
         ];
 
+        const roamingEnemies = {
+            enemies: {},
+            maxEnemies: 6,
+            nextId: 0,
+            enemiesKilledOnFloor: 0,
+            respawnAfterKills: 3,
+
+            // Check if a position is in a boulder's path
+            isInBoulderPath: function(x, y) {
+                if (!boulder.isActiveOnFloor) {
+                    return false;
+                }
+
+                if (boulder.direction === 'horizontal') {
+                    return y === boulder.y && x >= boulder.hallwayBounds.start.x && x <= boulder.hallwayBounds.end.x;
+                } else {
+                    return x === boulder.x && y >= boulder.hallwayBounds.start.y && y <= boulder.hallwayBounds.end.y;
+                }
+            },
+
+            isPlayerInLineOfSight: function(enemy) {
+                const dx = player.x - enemy.x;
+                const dy = player.y - enemy.y;
+                
+                const dirIndex = DIRECTIONS.indexOf(enemy.facing);
+                
+                // Check if player is in the general direction the enemy is facing
+                // Allow for a 90-degree cone of vision (45 degrees on each side)
+                switch (enemy.facing) {
+                    case 'N':
+                        return dy < 0 && Math.abs(dx) <= Math.abs(dy);
+                    case 'E':
+                        return dx > 0 && Math.abs(dy) <= Math.abs(dx);
+                    case 'S':
+                        return dy > 0 && Math.abs(dx) <= Math.abs(dy);
+                    case 'W':
+                        return dx < 0 && Math.abs(dy) <= Math.abs(dx);
+                    default:
+                        return false;
+                }
+            },
+
+            totalActiveEnemies: function() {
+                return Object.keys(roamingEnemies.enemies).length;
+            },
+
+            canSpawnEnemy: function(isFloorInitialization) {
+                const total = roamingEnemies.totalActiveEnemies();
+                return (
+                    (isFloorInitialization || total > 0) &&
+                    total < roamingEnemies.maxEnemies
+                );
+            },
+
+            spawnEnemy: function(isFloorInitialization) {
+                if (! roamingEnemies.canSpawnEnemy(isFloorInitialization)) {
+                    return;
+                }
+
+                const entrance = MAP.getEntrance();
+                let spawnCoords;
+
+                if (isFloorInitialization) {
+                    // Initial spawn: spawn away from the entry point
+                    const minDistanceFromEntrance = 2;
+                    spawnCoords = MAP.getEmptyCellCoordinates().filter(coord =>
+                        // Filter out positions that are in boulder paths
+                        !roamingEnemies.isInBoulderPath(coord.x, coord.y) &&
+                        (
+                            Math.abs(coord.x - entrance.x) >= minDistanceFromEntrance ||
+                            Math.abs(coord.y - entrance.y) >= minDistanceFromEntrance
+                        )
+                    );
+                } else {   
+                    const spawnRadius = 5; // Respawn enemies within radius
+                    const minPlayerDistance = 3; // Safeguard for respawn distance
+                    spawnCoords = MAP.getEmptyCellCoordinates().filter(coord => {
+                        const distanceFromPlayer = Math.max(
+                            Math.abs(coord.x - player.x),
+                            Math.abs(coord.y - player.y)
+                        );
+                        
+                        return (
+                            distanceFromPlayer >= minPlayerDistance &&
+                            distanceFromPlayer <= spawnRadius &&
+                            !roamingEnemies.isInBoulderPath(coord.x, coord.y)
+                        );
+                    });
+                }
+
+                if (spawnCoords.length === 0) {
+                    return;
+                }
+
+                const spawnPoint = randomEntry(spawnCoords);
+                const id = `enemy_${roamingEnemies.nextId++}`;
+
+                roamingEnemies.enemies[id] = {
+                    id,
+                    x: spawnPoint.x,
+                    y: spawnPoint.y,
+                    facing: randomEntry(DIRECTIONS),
+                    lastMoveDirection: randomEntry(DIRECTIONS),
+                    isPursuing: false
+                };
+            },
+
+            removeEnemy: function(enemyId) {
+                delete roamingEnemies.enemies[enemyId];
+            },
+
+            respawningEnabled: function() {
+                return (
+                    roamingEnemies.enemiesKilledOnFloor >=
+                    roamingEnemies.respawnAfterKills
+                );
+            },
+
+            killEnemy: function(enemyId) {
+                roamingEnemies.removeEnemy(enemyId);
+                roamingEnemies.enemiesKilledOnFloor++;
+                updateMinimapFooter();
+            },
+
+            isAt: function(x, y) {
+                return Object.values(roamingEnemies.enemies)
+                    .some(enemy => enemy.x === x && enemy.y === y);
+            },
+
+            getEnemyAt: function(x, y) {
+                return Object.values(roamingEnemies.enemies)
+                    .find(enemy => enemy.x === x && enemy.y === y);
+            },
+
+            getEnemy: function(id) {
+                return roamingEnemies.enemies[id];
+            },
+
+            moveEnemies: function() {
+                const hasRingOfStinky = player.inventory.hasEquippedRing("ringOfStinky");
+
+                Object.keys(roamingEnemies.enemies).forEach(enemyId => {
+                    const enemy = roamingEnemies.enemies[enemyId];
+                    const possibleMoves = [];
+                    const awayFromPlayerMoves = [];
+                    const towardPlayerMoves = [];
+
+                    // Calculate distance to player
+                    const distanceToPlayer = Math.abs(enemy.x - player.x) + Math.abs(enemy.y - player.y);
+                    
+                    // Torch increases enemy line of sight to 2
+                    const enemySightRange = player.isHoldingTorch ? 2 : 1;
+                    const isNearPlayer = distanceToPlayer <= enemySightRange;
+                    
+                    // Check if player is in line of sight
+                    const playerInLineOfSight = roamingEnemies.isPlayerInLineOfSight(enemy);
+                    
+                    // Enemy can see player if they're close AND in line of sight, OR if already pursuing
+                    const canSeePlayer = (isNearPlayer && playerInLineOfSight) || enemy.isPursuing;
+
+                    // Ring of Stinky behavior: % chance to avoid when close
+                    const shouldAvoidPlayer = hasRingOfStinky && canSeePlayer && Math.random() < 0.9;
+
+                    // Pursuit behavior: chase player when they can see them (unless avoiding due to Ring of Stinky)
+                    const shouldPursuePlayer = canSeePlayer && !shouldAvoidPlayer;
+
+                    // Update pursuit state
+                    if (shouldPursuePlayer) {
+                        enemy.isPursuing = true;
+                    } else if (distanceToPlayer > enemySightRange * 2) {
+                        // Stop pursuing if player gets far enough away
+                        enemy.isPursuing = false;
+                    }
+
+                    DIRECTIONS.forEach(direction => {
+                        const dirIndex = DIRECTIONS.indexOf(direction);
+                        const newX = enemy.x + DX[dirIndex];
+                        const newY = enemy.y + DY[dirIndex];
+
+                        const cell = MAP.getCell(newX, newY);
+                        if (cell && !cell.isSolid && (cell.type === 'floor' || (newX === player.x && newY === player.y))) {
+                            const moveData = { x: newX, y: newY, direction };
+                            possibleMoves.push(moveData);
+
+                            const currentDistance = Math.abs(enemy.x - player.x) + Math.abs(enemy.y - player.y);
+                            const newDistance = Math.abs(newX - player.x) + Math.abs(newY - player.y);
+
+                            if (newDistance < currentDistance) {
+                                towardPlayerMoves.push(moveData);
+                            } else if (newDistance > currentDistance) {
+                                awayFromPlayerMoves.push(moveData);
+                            }
+                        }
+                    });
+
+                    if (possibleMoves.length === 0) return;
+
+                    let selectedMove;
+
+                    // Priority 1: Ring of Stinky avoidance (overrides pursuit)
+                    if (shouldAvoidPlayer && awayFromPlayerMoves.length > 0) {
+                        selectedMove = randomEntry(awayFromPlayerMoves);
+                    }
+                    // Priority 2: Pursuit behavior when can see player
+                    else if (shouldPursuePlayer && towardPlayerMoves.length > 0) {
+                        selectedMove = randomEntry(towardPlayerMoves);
+                    }
+                    // Priority 3: Normal random movement behavior
+                    else {
+                        // Prefer continuing in the same direction, otherwise pick randomly
+                        selectedMove = possibleMoves.find(move => move.direction === enemy.lastMoveDirection);
+                        if (!selectedMove || Math.random() < 0.3) { // % chance to change direction
+                            selectedMove = randomEntry(possibleMoves);
+                        }
+                    }
+
+                    enemy.x = selectedMove.x;
+                    enemy.y = selectedMove.y;
+                    enemy.lastMoveDirection = selectedMove.direction;
+
+                    enemy.facing = selectedMove.direction;
+
+                    if (enemy.x === player.x && enemy.y === player.y) {
+                        roamingEnemies.encounterEnemy(enemy.id);
+                        delete roamingEnemies.enemies[enemy.id];
+                        return;
+                    }
+                });
+
+                // Respawn logic: spawn full maxEnemies amount when threshold is met
+                if (roamingEnemies.respawningEnabled()) {
+                    const total = roamingEnemies.totalActiveEnemies();
+                    
+                    // If we have fewer than maxEnemies and the respawn threshold is met
+                    if (total < roamingEnemies.maxEnemies) {
+                        // Spawn enough enemies to reach maxEnemies
+                        const enemiesToSpawn = roamingEnemies.maxEnemies - total;
+                        
+                        for (let i = 0; i < enemiesToSpawn; i++) {
+                            roamingEnemies.spawnEnemy(false);
+                        }
+                    }
+                }
+            },
+
+            encounterEnemy: function(id) {
+                const enemy = roamingEnemies.getEnemy(id);
+                if (!enemy) {
+                    return;
+                }
+                roamingEnemies.removeEnemy(id);
+                startEncounter();
+            },
+
+            initialize: function() {
+                roamingEnemies.enemies = {};
+                roamingEnemies.enemiesKilledOnFloor = 0;
+                updateMinimapFooter();
+
+                for (let i = 0; i < roamingEnemies.maxEnemies; i++) {
+                    roamingEnemies.spawnEnemy(true);
+                }
+            }
+        };
+
         function getEffectiveStat(stat) {
             if (stat === "persuasionAttempts") {
                 return player.inventory.hasEquippedRing("ringOfAmplifiedAudio")
@@ -9572,6 +10790,8 @@
             lean: new Audio('audio/sfx/lean.mp3'),
             merchantNear: new Audio('audio/sfx/merchant-near.ogg'),
             erokNear: new Audio('audio/sfx/erok-near.ogg'),
+            boulderNear: new Audio('audio/sfx/boulder-near.ogg'),
+            boulderHit: new Audio('audio/sfx/boulder-hit.ogg'),
         };
 
         const sfxAmb = {
@@ -9587,6 +10807,9 @@
         let ambientSfxStartTime = null;
         let npcProximityTimers = new Map();
         let npcProximityIntervals = new Map();
+        let boulderProximityTimer = null;
+        let boulderProximityAudio = null;
+        let lastBoulderDistance = null;
         let currentEnemy = null;
         let gameOver = false;
         let persuasionAttempts = 0;
@@ -9595,6 +10818,8 @@
         let animationActive = false;
         let currentBreathing = null;
         let floor = 1;
+        let boulderMovementInterval = null;
+
         const MAP = new GameMap();
         MAP.setMinimap(document.getElementById("minimap"));
 
@@ -9606,6 +10831,7 @@
             healingTile: {
                 displayName: "Healing Tile",
                 mapCharacter: "H",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function (x, y) {
                     player.steppingOnHealingTile = true;
 
@@ -9654,6 +10880,7 @@
             crackedFloorSlight: {
                 displayName: "Slightly-Cracked Floor",
                 mapCharacter: '✕',
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function (x, y) {
                     const weightLevel = player.getWeightLevel();
 
@@ -9686,6 +10913,7 @@
             crackedFloor: {
                 displayName: "Cracked Floor",
                 mapCharacter: '✕',
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function (x, y) {
                     const weightLevel = player.getWeightLevel();
 
@@ -9708,6 +10936,7 @@
             crackedFloorSevere: {
                 displayName: "Severely-Cracked Floor",
                 mapCharacter: '✖',
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function (x, y) {
                     player.fallThroughFloorAndDie();
                 },
@@ -9761,6 +10990,7 @@
             exit: {
                 displayName: "Exit",
                 mapCharacter: "E",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function() {
                     descend();
                 }
@@ -9768,6 +10998,7 @@
             merchant: {
                 displayName: "Merchant",
                 mapCharacter: "M",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function(x, y) {
                     music.play("merchantTheme");
                     menu.open('merchant', () => npcMove());
@@ -9795,6 +11026,7 @@
             gambler: {
                 displayName: "Gambler",
                 mapCharacter: "G",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function(x, y) {
                     menu.open('gambler', () => npcMove());
                 },
@@ -9827,6 +11059,7 @@
             erok: {
                 displayName: "Erok",
                 mapCharacter: "D",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function(x, y) {
                     menu.open('erok', () => npcMove());
                 },
@@ -9859,6 +11092,7 @@
             tardspireBanner: {
                 displayName: "Floor",
                 mapCharacter: ".",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function (x, y) {
                     MAP.setCell(x, y);
                 },
@@ -9869,6 +11103,7 @@
             treasureChest: {
                 displayName: "Treasure Chest",
                 mapCharacter: "T",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function(x, y) {
                     menu.open("chest");
                 },
@@ -9884,6 +11119,7 @@
             mimic: {
                 displayName: "Treasure Chest",
                 mapCharacter: "T",
+                canBeRolledOverByBouldingBall: false,
                 onEnter: async function (x, y) {
                     menu.open("chest");
                 },
@@ -9904,6 +11140,14 @@
                         `maw.`
                     );
                     playSFX('scream');
+                },
+            },
+            roamingEnemy: {
+                displayName: "Monster",
+                mapCharacter: "☠︎︎",
+                canBeRolledOverByBouldingBall: false,
+                isVisible: function() {
+                    return true;
                 },
             },
         });
@@ -10056,10 +11300,27 @@
             spawnHealingTiles();
             spawnCrackedFloors();
 
+            if (Math.random() < 0.6) { // % chance to spawn boulder
+                boulder.spawn();
+            } else {
+                boulder.isActiveOnFloor = false;
+            }
+
+            // Initialize roaming enemies after all other map elements are placed
+            roamingEnemies.initialize();
+
             document.getElementById('minimapHeader').innerText =
                 `Dungeon Floor ${floor}`;
 
+            updateMinimapFooter();
             vampire.initialize();
+        }
+
+        function updateMinimapFooter() {
+            const $minimapFooter = document.getElementById('minimapFooter');
+            if ($minimapFooter) {
+                $minimapFooter.textContent = `Monsters Killed: ${roamingEnemies.enemiesKilledOnFloor}`;
+            }
         }
 
         let autoDicerollEnabled = false;
@@ -10177,8 +11438,16 @@
             return randomEntry(
                 Object
                     .keys(items)
-                    .filter(itemId => items[itemId] .merchantStockChance > 0)
+                    .filter(itemId => items[itemId].merchantStockChance > 0)
             );
+        }
+
+        function getRandomChestItem() {
+            const items = InventoryObjectDefinitions.items;
+            const chestEligibleItems = Object.keys(items)
+                .filter(itemId => items[itemId].chestDrop);
+
+            return chestEligibleItems.length > 0 ? randomEntry(chestEligibleItems) : null;
         }
 
         function updateSeenTiles() {
@@ -10255,9 +11524,7 @@
                     x: vampire.x,
                     y: vampire.y,
                     displayName: player.hasEncounteredVampire
-                        ?
-                            `<span class="${vampire.displayClassName}">` +
-                            `${vampire.displayName}</span>`
+                        ? `<span class="gay vampire">${vampire.displayName}</span>`
                         : `<em>A Menacing... Fruit Bat?</em>`,
                     isExplored: true,
                     isVisible: true,
@@ -10276,6 +11543,35 @@
                     type: "pigeon",
                 };
             }
+
+            if (boulder.isActiveOnFloor) {
+                entities.boulder = {
+                    x: boulder.x,
+                    y: boulder.y,
+                    displayName: "Boulding Ball",
+                    isVisible: true,
+                    mapCharacter: " ", // Handled by the #minimap .boulder class
+                    type: "boulder",
+                };
+            }
+
+            Object.values(roamingEnemies.enemies).forEach(enemy => {
+                const directionArrows = {
+                    'N': '↑',
+                    'E': '→', 
+                    'S': '↓',
+                    'W': '←'
+                };
+                
+                entities[`roamingEnemy_${enemy.id}`] = {
+                    x: enemy.x,
+                    y: enemy.y,
+                    displayName: "Monster",
+                    isVisible: true,
+                    mapCharacter: directionArrows[enemy.facing] || "☠︎",
+                    type: "roamingEnemy",
+                };
+            });
 
             entities.player = {
                 forceRefresh: true,
@@ -10299,6 +11595,7 @@
             updateBreathingSFX();
             updateSkyboxPosition();
             checkNPCProximity();
+            checkBoulderProximity();
 
             // @TODO: Keep this out of render()
             // Stat updates should update the appropriate sections on their own
@@ -10323,7 +11620,10 @@
 
             if (gameOver) {
                 GameControl.disableControls();
-                Portrait.show('death');
+                
+                const deathPortrait = currentEnemy?.id === "vampire" ? "deathVampire" : "death";
+                Portrait.show(deathPortrait);
+                
                 updateBattleLog(`Good job! <span class="action">You died</span> on <span class="action">floor ${floor}</span>`);
                 setTimeout(() => {
                     window.location.reload();
@@ -10531,6 +11831,20 @@
             $trombone.classList.remove('onscreen');
         }
 
+        function animBoulderHit() {
+            const $boulderHit = document.getElementById('animBoulderHit');
+            if (!$boulderHit) {
+                console.error('Boulder hit animation element not found');
+                return;
+            }
+
+            $boulderHit.classList.add('onscreen');
+
+            setTimeout(() => {
+                $boulderHit.classList.remove('onscreen');
+            }, 3000); // Slide anim back out of viewport after this duration
+        }
+
         function shakeScreen() {
             const $children = document.getElementById('viewport').children;
 
@@ -10540,7 +11854,8 @@
                 if ($child.classList.contains('ui-header')) continue;
                 const childIsVisible =
                     !$child.classList.contains('hidden') &&
-                    !$child.classList.contains('offscreen');
+                    !$child.classList.contains('offscreen') &&
+                    !$child.classList.contains('fixed');
 
                 if (!childIsVisible) {
                     continue;
@@ -10561,7 +11876,8 @@
                 if ($child.classList.contains('ui-header')) continue;
                 const childIsVisible =
                     !$child.classList.contains('hidden') &&
-                    !$child.classList.contains('offscreen');
+                    !$child.classList.contains('offscreen') &&
+                    !$child.classList.contains('fixed');
 
                 if (!childIsVisible) {
                     continue;
@@ -10644,6 +11960,12 @@
                     render();
                 }
             }
+
+            // Roaming Enemy movement
+            if (!player.inCombat && !gameOver) {
+                roamingEnemies.moveEnemies();
+                render();
+            }
         }
 
         async function move(direction) {
@@ -10653,7 +11975,7 @@
             player.movementDisabled = true;
 
             playSFX('footstep');
-            let nx, ny, randomEncounterChance = 0.4;
+            let nx, ny;
             if (direction === 'forward') {
                 nx = player.x + DX[player.dir];
                 ny = player.y + DY[player.dir];
@@ -10669,13 +11991,7 @@
             } else {
                 nx = player.x - DX[player.dir];
                 ny = player.y - DY[player.dir];
-                randomEncounterChance = 0.5; // When moving backward
                 shakeScreen();
-            }
-
-            // If Ring of Stinky is equipped, reduce encounter chance by 30%
-            if (player.inventory.hasEquippedRing("ringOfStinky")) {
-                randomEncounterChance *= 0.7;
             }
 
             const tile = MAP.getCell(nx, ny);
@@ -10683,10 +11999,21 @@
                 player.x = nx;
                 player.y = ny;
                 player.stepsTakenOnCurrentFloor++;
-                player.stepsSinceLastBattle++;
+
+                const enemy = roamingEnemies.getEnemyAt(player.x, player.y);
+                if (enemy) {
+                    roamingEnemies.encounterEnemy(enemy.id);
+                    player.movementDisabled = false;
+                    GameControl.update();
+                    return;
+                }
 
                 // @TODO: Make the map system support onEnter for entities
                 //        and move this logic there
+                if (boulder.isAt(player.x, player.y)) {
+                    boulder.hitPlayer();
+                }
+
                 if (vampire.encounteredPlayer()) {
                     vampire.encounter();
                 }
@@ -10704,24 +12031,22 @@
                     if (isAsync) {
                         await maybePromise;
                     }
-                // Only trigger random encounters after 2 steps since last battle
-                } else if (player.stepsSinceLastBattle > 2 && Math.random() < randomEncounterChance) {
-                    startEncounter();
+                }
+
+                GameControl.update();
+
+                // @TODO: Handle NPC movement after the menu has closed
+                const shouldSkipNpc = player.inCombat || menu.isOpen();
+
+                if (!shouldSkipNpc) {
+                    await endOfPlayerMove();
+                } else {
+                    const timeDelayMs = player.getInputDelayMs();
+                    await sleepMs(timeDelayMs);
                 }
             } else if (typeof tile.onTouch === "function") {
                 tile.onTouch();
-            }
-
-            GameControl.update();
-
-            // @TODO: Handle NPC movement after the menu has closed
-            const shouldSkipNpc = player.inCombat || menu.isOpen();
-
-            if (!shouldSkipNpc) {
-                await endOfPlayerMove();
-            } else {
-                const timeDelayMs = player.getInputDelayMs();
-                await sleepMs(timeDelayMs);
+                // Don't increment steps or handle NPC movement when touching walls
             }
 
             player.movementDisabled = false;
@@ -10750,6 +12075,31 @@
             updateSkyboxPosition();
             GameControl.update();
             render();
+        }
+
+        async function wait() {
+            if (player.inCombat || gameOver || player.movementDisabled) {
+                return;
+            }
+            player.movementDisabled = true;
+            player.stepsTakenOnCurrentFloor++;
+
+            updateBattleLog("You kneel down and rest for but a moment, pondering your thoughts and awaiting a response from the spire...");
+
+            GameControl.update();
+
+            // Process NPC movement during wait
+            const shouldSkipNpc = player.inCombat || menu.isOpen();
+
+            if (!shouldSkipNpc) {
+                await endOfPlayerMove();
+            } else {
+                const timeDelayMs = player.getInputDelayMs();
+                await sleepMs(timeDelayMs);
+            }
+
+            player.movementDisabled = false;
+            GameControl.update();
         }
 
         function updateBreathingSFX() {
@@ -10877,9 +12227,7 @@
                 updateBattleLog(combatMessage);
                 render();
             };
-
-            player.inCombat = true;
-
+            
             if (battleTransitionAnimationsEnabled) {
                 animBattleTransitionStart(
                     () => startCombat(),
@@ -10972,6 +12320,11 @@
                 // When enemy dies, block input until battle is fully over
                 playerAttackCooldown = true;
                 animAsh(currentEnemy.id, () => {
+                    if (currentEnemy.isWild && currentEnemy.id !== "vampire") {
+                        roamingEnemies.enemiesKilledOnFloor++;
+                        updateMinimapFooter();
+                    }
+                    
                     if (currentEnemy.id === "mimic") {
                         updateBattleLog(`The <span class="enemy">MIMIC</span> has been defeated! You find <span class="BTC">₿ ${currentEnemy.bitcoins}</span> in its remains!`);
                         player.giveBitcoins(currentEnemy.bitcoins);
@@ -11025,19 +12378,19 @@
                         playerAttackCooldown = false; // Reset for level up screen
                         player.leaveCombat();
                         setTorchOverlayVisibility();
-                        startLevelUpAllocation(() => npcMove());
+                        startLevelUpAllocation(() => render());
                     } else {
                         player.leaveCombat();
                         setTorchOverlayVisibility();
                         if (battleTransitionAnimationsEnabled) {
                             playerAttackCooldown = false;
                             animBattleTransitionStart(() => {
-                                npcMove();
+                                render();
                             }, false, true);
                         } else {
                             playSFX('battleEnd');
                             playerAttackCooldown = false; // Reset when battle fully ends
-                            npcMove();
+                            render();
                         }
                     }
                 });
@@ -11241,7 +12594,7 @@
 
             const ambientSounds = Object.keys(sfxAmb);
             const randomSound = randomEntry(ambientSounds);
-            
+
             if (randomSound && sfxAmb[randomSound]) {
                 const ambientVolume = 0.6; // Ambient audio volume
                 sfxAmb[randomSound].currentTime = 0;
@@ -11249,7 +12602,7 @@
                 sfxAmb[randomSound].play().catch(() => {
                 });
             }
-            
+
             scheduleNextAmbientSfx();
         }
 
@@ -11260,7 +12613,7 @@
             if (ambientSfxPaused || TITLE_SCREEN.isActive || menu.isOpen()) {
                 return;
             }
-            
+
             let delay;
             if (ambientSfxScheduledTime !== null) {
                 delay = ambientSfxScheduledTime;
@@ -11272,7 +12625,7 @@
                 const maxDelayMs = 60000;
                 delay = numberBetween(minDelayMs, maxDelayMs);
             }
-            
+
             ambientSfxStartTime = performance.now();
             ambientSfxTimeout = setTimeout(playRandomAmbientSfx, delay);
         }
@@ -11284,7 +12637,7 @@
                     const originalDelay = 40000; // Use minimum delay as fallback
                     ambientSfxScheduledTime = Math.max(1000, originalDelay - elapsed);
                 }
-                
+
                 clearTimeout(ambientSfxTimeout);
                 ambientSfxTimeout = null;
                 ambientSfxPaused = true;
@@ -11337,7 +12690,7 @@
 
             currentNearbyNPCs.forEach((npcData, npcName) => {
                 const wasNearby = player.lastNearbyNPCs.has(npcName);
-                
+
                 if (!wasNearby) {
                     // First time entering proximity - play immediately and start interval
                     playProximitySound(npcName, npcData.distance);
@@ -11367,7 +12720,7 @@
                 const minVolume = 0.1; // Min volume when farthest away from NPC
                 const volume = maxVolume - ((distance - 1) / (maxRange - 1)) * (maxVolume - minVolume);
                 const clampedVolume = Math.max(minVolume, Math.min(maxVolume, volume));
-                
+
                 sfx[soundName].currentTime = 0;
                 sfx[soundName].volume = clampedVolume;
                 sfx[soundName].play().catch(() => {
@@ -11383,17 +12736,17 @@
             };
 
             timerData.intervalId = setInterval(() => {
-                if (player.lastNearbyNPCs.has(npcName) && 
-                    sfxEnabled && 
-                    !player.inCombat && 
-                    !gameOver && 
+                if (player.lastNearbyNPCs.has(npcName) &&
+                    sfxEnabled &&
+                    !player.inCombat &&
+                    !gameOver &&
                     !menu.isOpen()) {
                     playProximitySound(npcName, timerData.distance);
                 } else {
                     clearProximityTimer(npcName);
                 }
             }, numberBetween(10000, 20000)); // Time intervals between playing the NPC sound in seconds
-            
+
             npcProximityTimers.set(npcName, timerData);
         }
 
@@ -11413,6 +12766,98 @@
             });
             npcProximityTimers.clear();
             player.lastNearbyNPCs.clear();
+        }
+
+        function checkBoulderProximity() {
+            if (!sfxEnabled || player.inCombat || gameOver || menu.isOpen()) {
+                clearBoulderProximity();
+                return;
+            }
+
+            if (!boulder.isActiveOnFloor) {
+                clearBoulderProximity();
+                return;
+            }
+
+            const boulderLocation = boulder.location();
+            if (!boulderLocation) {
+                clearBoulderProximity();
+                return;
+            }
+
+            const distance = Math.abs(player.x - boulderLocation.x) + Math.abs(player.y - boulderLocation.y);
+            const boulderProximityRange = 8; // Boulder proximity range
+
+            if (distance <= boulderProximityRange) {
+                if (!boulderProximityAudio) {
+                    startBoulderProximityAudio(distance);
+                } else {
+                    updateBoulderProximityVolume(distance);
+                }
+                lastBoulderDistance = distance;
+            } else {
+                clearBoulderProximity();
+            }
+        }
+
+        function startBoulderProximityAudio(distance) {
+            if (!sfx.boulderNear) return;
+
+            boulderProximityAudio = sfx.boulderNear;
+            boulderProximityAudio.loop = true;
+            boulderProximityAudio.currentTime = 0;
+            updateBoulderProximityVolume(distance);
+
+            boulderProximityAudio.play().catch(() => {
+            });
+
+            boulderProximityTimer = setInterval(() => {
+                if (!boulder.isActiveOnFloor || player.inCombat || gameOver || menu.isOpen()) {
+                    clearBoulderProximity();
+                    return;
+                }
+
+                const boulderLocation = boulder.location();
+                if (boulderLocation) {
+                    const currentDistance = Math.abs(player.x - boulderLocation.x) + Math.abs(player.y - boulderLocation.y);
+                    if (currentDistance <= 5) {
+                        updateBoulderProximityVolume(currentDistance);
+                    } else {
+                        clearBoulderProximity();
+                    }
+                } else {
+                    clearBoulderProximity();
+                }
+            }, 500);
+        }
+
+        function updateBoulderProximityVolume(distance) {
+            if (!boulderProximityAudio) return;
+
+            const maxRange = 8; // Boulder proximity range
+            const maxVolume = 1; // Max volume when closest
+            const minVolume = 0.1; // Min volume when furthest away
+
+            const volume = maxVolume - ((distance - 1) / (maxRange - 1)) * (maxVolume - minVolume);
+            const clampedVolume = Math.max(minVolume, Math.min(maxVolume, volume));
+
+            boulderProximityAudio.volume = clampedVolume;
+        }
+
+        function clearBoulderProximity() {
+            if (boulderProximityTimer) {
+                clearInterval(boulderProximityTimer);
+                boulderProximityTimer = null;
+            }
+
+            if (boulderProximityAudio) {
+                boulderProximityAudio.pause();
+                boulderProximityAudio.currentTime = 0;
+                boulderProximityAudio.loop = false;
+                boulderProximityAudio = null;
+            }
+
+            lastBoulderDistance = null;
         }
 
         async function tryRun() {
@@ -12135,31 +13580,56 @@
                 player.enterCombat();
                 music.playRandom("battle");
             } else if (cellType === 'treasureChest') {
-                // Normal chest, provide loot
-                const lootTypeRoll = Math.random();
+                const CHEST_LOOT_CHANCES = {
+                    btc: 50,    // % chance for BTC
+                    items: 25,  // % chance for items
+                    rings: 25   // % chance for rings
+                };
+
+                // Roll for loot type
+                const roll = Math.random() * 100;
                 let chestContents;
-                if (lootTypeRoll < 0.4) {
-                    chestContents = { type: 'BTC', amount: Math.floor(Math.random() * 10) + 3 };
-                } else if (lootTypeRoll < 0.7) {
-                    chestContents = { type: 'item', item: getRandomItem() };
+
+                if (roll < CHEST_LOOT_CHANCES.btc) {
+                    // BTC reward
+                    chestContents = {
+                        type: 'BTC',
+                        amount: Math.floor(Math.random() * 10) + 3
+                    };
+                } else if (roll < CHEST_LOOT_CHANCES.btc + CHEST_LOOT_CHANCES.items) {
+                    // Item reward
+                    const item = getRandomChestItem();
+                    if (item) {
+                        chestContents = { type: 'item', item: item };
+                    } else {
+                        // Fallback to BTC if no items are available for chests
+                        chestContents = {
+                            type: 'BTC',
+                            amount: Math.floor(Math.random() * 10) + 3
+                        };
+                    }
                 } else {
-                    // Try to spawn a ring based on chestChance
+                    // Ring reward
                     const rings = InventoryObjectDefinitions.rings;
                     const ownedRings = Object.keys(player.inventory.getRings());
-                    const unonwedRings =
-                        Object.keys(rings).filter(r => !ownedRings.includes(r));
-                    const possibleRings = unonwedRings.filter(ringId =>
-                        Math.random() < (rings[ringId].chestChance || 0)
+                    const unownedRings = Object.keys(rings).filter(r => !ownedRings.includes(r));
+                    const eligibleRings = unownedRings.filter(ringId =>
+                        rings[ringId].chestDrop === true
                     );
-                    if (possibleRings.length > 0) {
-                        const ringId = randomEntry(possibleRings);
+
+                    if (eligibleRings.length > 0) {
+                        const ringId = randomEntry(eligibleRings);
                         chestContents = { type: 'ring', ring: ringId };
                     } else {
-                        // fallback to BTC if no ring
-                        chestContents = { type: 'BTC', amount: Math.floor(Math.random() * 10) + 3 };
+                        // Fallback to BTC if no rings available
+                        chestContents = {
+                            type: 'BTC',
+                            amount: Math.floor(Math.random() * 10) + 3
+                        };
                     }
                 }
 
+                // Handle the loot (existing code remains the same)
                 if (chestContents.type === 'BTC') {
                     let bonus = Math.floor(chestContents.amount * (getEffectiveStat('luck') * 0.02));
                     let total = chestContents.amount + bonus;
@@ -12281,6 +13751,10 @@
                     case 'e':
                         e.preventDefault();
                         move('strafeRight');
+                        break;
+                    case ' ': // Spacebar
+                        e.preventDefault();
+                        wait();
                         break;
                     case 't':
                         speakingOutsideCombat = true;
@@ -14775,6 +16249,7 @@
 
         InventorySidebar.refresh();
         generateMap();
+        startBoulderMovement();
         updateSeenTiles();
         music.playRandom("exploration");
         scheduleNextAmbientSfx();
