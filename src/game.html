@@ -23,9 +23,17 @@
         <div id="topLeft">
             <pre id="portraitArtOverlay" class="portrait-art hidden"></pre>
             <div id="minimapContainer">
-                <div id="minimapHeader" class="ui-header space-around">Dungeon Floor --</div>
+                <div id="minimapHeader" class="ui-header space-between">
+                    <span id="dungeonFloor">--</span>
+                    <span
+                        id="killCounter"
+                        data-tooltipposition="top"
+                        data-tooltiphtml='
+                            <div class="genericTooltip">Total Kills</div>
+                        '
+                    >0</span>
+                </div>
                 <div id="minimap"></div>
-                <div id="minimapFooter" class="minimap-footer"></div>
             </div>
         </div>
         <div id="inputBox">
@@ -445,6 +453,8 @@
         </div>
 
     <script src="scripts/preloader-v2.js"></script>
+    <!-- VOCAP: must be loaded before any other API modules! -->
+    <script src="scripts/tardAPI.js"></script>
     <script src="scripts/tardboard.js"></script>
     <script src="scripts/pigeon.js"></script>
     <script src="scripts/no-arrow-key-scroll.js"></script>
@@ -461,6 +471,7 @@
     <script src="data/enemyart.js"></script>
     <script src="data/title-screen.js"></script>
     <script src="scripts/gamepad.js"></script>
+    <script src="scripts/partymenu.js"></script>
     <script>
         Tooltip.groupSettings = {
             playerInput: {
@@ -6657,6 +6668,211 @@
                     },
                 ],
             },
+
+            gravestone: {
+                relativeColor: { r: 191, g: 191, b: 191 },
+                positions: {
+                    p0_0: {
+                        artIndex: 0,
+                        drawAt: { x: -19, y: 22 },
+                    },
+                    p0_2: {
+                        artIndex: 0,
+                        drawAt: { x: 48, y: 22 },
+                    },
+                    p1_0: {
+                        artIndex: 0,
+                        drawAt: { x: 0, y: -14 },
+                    },
+                    p1_1: {
+                        artIndex: 0,
+                        drawAt: { x: 14, y: 16 },
+                    },
+                    p1_2: {
+                        artIndex: 0,
+                        drawAt: { x: 45, y: 16 },
+                    },
+                    p2_0: {
+                        artIndex: 1,
+                        drawAt: { x: -8, y: 15 },
+                    },
+                    p2_1: {
+                        artIndex: 1,
+                        drawAt: { x: 4, y: 16 },
+                    },
+                    p2_2: {
+                        artIndex: 2,
+                        drawAt: { x: 20, y: 16 },
+                    },
+                    p2_3: {
+                        artIndex: 2,
+                        drawAt: { x: 36, y: 16 },
+                    },
+                    p2_4: {
+                        artIndex: 2,
+                        drawAt: { x: 46, y: 16 },
+                    },
+                    p3_0: {
+                        artIndex: 3,
+                        drawAt: { x: -3, y: 15 },
+                    },
+                    p3_1: {
+                        artIndex: 3,
+                        drawAt: { x: 2, y: 15 },
+                    },
+                    p3_2: {
+                        artIndex: 3,
+                        drawAt: { x: 13, y: 15 },
+                    },
+                    p3_3: {
+                        artIndex: 3,
+                        drawAt: { x: 23, y: 15 },
+                    },
+                    p3_4: {
+                        artIndex: 3,
+                        drawAt: { x: 33, y: 15 },
+                    },
+                    p3_5: {
+                        artIndex: 3,
+                        drawAt: { x: 39, y: 15 },
+                    },
+                    p3_6: {
+                        artIndex: 3,
+                        drawAt: { x: 46, y: 15 },
+                    },
+                    p4_0: {
+                        artIndex: 4,
+                        drawAt: { x: 6, y: 14 },
+                    },
+                    p4_1: {
+                        artIndex: 4,
+                        drawAt: { x: 11, y: 14 },
+                    },
+                    p4_2: {
+                        artIndex: 4,
+                        drawAt: { x: 16, y: 14 },
+                    },
+                    p4_3: {
+                        artIndex: 4,
+                        drawAt: { x: 21, y: 14 },
+                    },
+                    p4_4: {
+                        artIndex: 4,
+                        drawAt: { x: 24, y: 14 },
+                    },
+                    p4_5: {
+                        artIndex: 4,
+                        drawAt: { x: 28, y: 14 },
+                    },
+                    p4_6: {
+                        artIndex: 4,
+                        drawAt: { x: 33, y: 14 },
+                    },
+                    p4_7: {
+                        artIndex: 4,
+                        drawAt: { x: 38, y: 14 },
+                    },
+                    p4_8: {
+                        artIndex: 4,
+                        drawAt: { x: 43, y: 14 },
+                    },
+                    p5_0: {
+                        artIndex: 5,
+                        drawAt: { x: 14, y: 14 },
+                    },
+                    p5_1: {
+                        artIndex: 5,
+                        drawAt: { x: 16, y: 14 },
+                    },
+                    p5_2: {
+                        artIndex: 5,
+                        drawAt: { x: 18, y: 14 },
+                    },
+                    p5_3: {
+                        artIndex: 5,
+                        drawAt: { x: 20, y: 14 },
+                    },
+                    p5_4: {
+                        artIndex: 5,
+                        drawAt: { x: 22, y: 14 },
+                    },
+                    p5_5: {
+                        artIndex: 5,
+                        drawAt: { x: 24, y: 14 },
+                    },
+                    p5_6: {
+                        artIndex: 5,
+                        drawAt: { x: 26, y: 14 },
+                    },
+                    p5_7: {
+                        artIndex: 5,
+                        drawAt: { x: 28, y: 14 },
+                    },
+                    p5_8: {
+                        artIndex: 5,
+                        drawAt: { x: 30, y: 14 },
+                    },
+                    p5_9: {
+                        artIndex: 5,
+                        drawAt: { x: 32, y: 14 },
+                    },
+                    p5_10: {
+                        artIndex: 5,
+                        drawAt: { x: 34, y: 14 },
+                    },
+                },
+                art: [
+                    {
+                        transparentCharacter: '%',
+                        data: `
+                            %%%%%▄▄▄▄▄▄▄▄▄▄▄▄▄%%%%
+                            %%%%█             █%%%
+                            %%%%█             █%%%
+                            %%%%█ █▀▄  ▀  █▀▄ █%%%
+                            %%%█  █▀▄  █  █▀   █%%
+                            %%%█               █%%
+                            %%▄█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█▄%
+                        `,
+                    },
+                    {
+                        transparentCharacter: '%',
+                        data: `
+
+                              ▄▀▀▀█▀▄ 
+                             █RIP █ █ 
+                            ▄█▄▄▄▄█▄█ 
+                        `,
+                    },
+                    {
+                        transparentCharacter: '%',
+                        data: `
+                                      
+                            %%▄▀▀▀▄%%%
+                            %%█RIP█%%%
+                            %▄▀   ▀▄%%
+                            ▀▀▀▀▀▀▀▀▀%
+                        `,
+                    },
+                    {
+                        data: `
+                            ▐▀▀▌
+                            ▌  ▐
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        data: `
+                            ▆▆
+                        `,
+                    },
+                    {
+                        automaskBlockCharacters: true,
+                        data: `
+                            ▗▖
+                        `,
+                    },
+                ],
+            },
         };
 
         const Portrait = {
@@ -8015,6 +8231,24 @@
                     weight: 1,
                     price: 10,
                 },
+
+                seedPhial: {
+                    article: 'a',
+                    name: "PHIAL OF SEED",
+                    description: "Seed that you can inject into your humble friends! Heals party member by 40% of max HP. +0.4 LOAD",
+                    use: () => {
+                        updateBattleLog(
+                            `<span class="action">You can't eat this!</span> ` +
+                            `This phial full of seed is not safe for humans. Feed your party ` +
+                            `via a member's character sheet instead.`
+                        );
+                        return false;
+                    },
+                    merchantStockChance: 0.8,
+                    chestDrop: true,
+                    weight: 0.4,
+                    price: 15,
+                },
             }),
 
             // Inventory object category: Weapons
@@ -8439,6 +8673,7 @@
             speed: baseStats.speed,
             luck: baseStats.luck,
             exp: 0,
+            totalExp: 0,
             level: 1,
             stepsTakenOnCurrentFloor: 0,
             lastNearbyNPCs: new Set(),
@@ -8648,11 +8883,14 @@
                     : 192,
             getExpRequiredForLevelUp: () => player.level * 10,
             levelUp: () => {
-                const rolledOverExp = Math.max(0, player.exp - player.getExpRequiredForLevelUp());
+                const expRequired = player.getExpRequiredForLevelUp();
+                const rolledOverExp = Math.max(0, player.exp - expRequired);
+                player.totalExp += expRequired;
                 player.level++;
                 player.exp = rolledOverExp;
                 player.hp = getEffectiveStat('maxHp');
                 document.getElementById('playerLevel').innerText = player.level;
+                TardAPI.updateProgress();
             },
             getInputDelayMs: () => {
                 const minDelayMs = 1;
@@ -8734,6 +8972,9 @@
 
                     $partyMembers.replaceChildren(...placeholders);
                 },
+
+
+                
                 getPartyMemberPlaceholder: () => {
                     const $placeholder = document.createElement("div");
                     $placeholder.className = "party-member placeholder";
@@ -8781,9 +9022,13 @@
                         $partyMembers.appendChild($placeholder);
                     }
                 },
-                add: (enemyId, name, hp, maxHp) => {
+                add: (enemyId, name, hp, maxHp, persuasionMessage) => {
                     const index = player.party.members.length;
                     const partyMemberId = player.party.seenMembers;
+                    const floorBoost = Math.floor(floor / 2);
+                    const baseDef = Math.max(1, 3 + floorBoost);
+                    const startingExp = Math.max(0, (floor - 1) * 5);
+                    
                     player.party.members.push({
                         id: partyMemberId,
                         enemyId,
@@ -8791,45 +9036,49 @@
                         hp,
                         maxHp,
                         healedThisBattle: false,
+                        persuasionMessage,
+                        level: 1,
+                        exp: startingExp,
+                        totalExp: startingExp,
+                        def: baseDef,
                     });
 
-                    const $partyMembers =
-                        document.getElementById("partyMembers");
+                    const $partyMembers = document.getElementById("partyMembers");
                     const $partyMember = $partyMembers.children.item(index);
 
-                    $partyMember.setAttribute(
-                        'data-partyMemberId',
-                        partyMemberId
-                    );
+                    $partyMember.setAttribute('data-partyMemberId', partyMemberId);
 
-                    $partyMember.querySelector(".name").textContent = name;
+                    const $nameElement = $partyMember.querySelector('.name');
+                    $nameElement.innerHTML = `<span class="clickable-name" onclick="showPartyMemberModal(${partyMemberId})">LV.${1} ${name}</span>`;
 
-                    const $healthBar =
-                        $partyMember.querySelector("progress-bar");
+                    const $healthBar = $partyMember.querySelector("progress-bar");
                     $healthBar.setAttribute('value', hp);
                     $healthBar.setAttribute('max', maxHp);
                     $healthBar.removeAttribute("placeholder");
 
-                    const $talkButton =
-                        $partyMember.querySelector("button.talk");
+                    const $talkButton = $partyMember.querySelector("button.talk");
                     $talkButton.disabled = false;
-                    $talkButton.onclick =
-                        () => player.party.talk(partyMemberId);
+                    $talkButton.onclick = () => player.party.talk(partyMemberId);
 
-                    const $releaseButton =
-                        $partyMember.querySelector("button.release");
+                    const $releaseButton = $partyMember.querySelector("button.release");
                     $releaseButton.disabled = false;
-                    $releaseButton.onclick =
-                        () => player.party.release(partyMemberId);
+                    $releaseButton.onclick = () => player.party.release(partyMemberId);
 
                     $partyMember.classList.remove("placeholder");
                     player.party.seenMembers++;
+                    
+                    if (startingExp > 0) {
+                        const member = player.party.members[player.party.members.length - 1];
+                        const expRequired = player.party.getExpRequiredForLevelUp(member.level);
+                        if (member.exp >= expRequired) {
+                            player.party.levelUpMember(member);
+                        }
+                    }
                 },
                 refresh: () => {
                     for (let i=0; i<player.party.members.length; i++) {
                         const partyMember = player.party.members[i];
-                        const selector =
-                            `#partyMembers [data-partyMemberId="${partyMember.id}"]`;
+                        const selector = `#partyMembers [data-partyMemberId="${partyMember.id}"]`;
 
                         const $partyMember = document.querySelector(selector);
                         if (!$partyMember) {
@@ -8840,15 +9089,26 @@
                             continue;
                         }
 
+                        // Update name with level
+                        const $nameElement = $partyMember.querySelector('.name .clickable-name');
+                        if ($nameElement) {
+                            $nameElement.textContent = `LV.${partyMember.level} ${partyMember.name}`;
+                        }
+
+                        // Handle dead member styling
                         if (partyMember.hp <= 0) {
                             $partyMember.querySelector('.name')
                                 .classList.add('strikethrough');
                             player.party.disableButtons(partyMember.id);
+                        } else {
+                            $partyMember.querySelector('.name')
+                                .classList.remove('strikethrough');
                         }
 
-                        const $healthBar = $partyMember
-                            .querySelector(`progress-bar.health-bar`);
+                        // Update health bar
+                        const $healthBar = $partyMember.querySelector(`progress-bar.health-bar`);
                         $healthBar.setAttribute('value', partyMember.hp);
+                        $healthBar.setAttribute('max', partyMember.maxHp);
                     }
 
                     player.party.refreshPartyCount();
@@ -9086,6 +9346,55 @@
                         ]
                     );
                 },
+
+                giveExperience: (baseExp = 2) => {
+                    // Calculate exp based on floor (same scaling as enemy stats)
+                    const floorBoost = Math.floor(floor / 2);
+                    const expToGive = Math.max(1, baseExp + floorBoost);
+                    
+                    player.party.members.forEach(member => {
+                        if (member.hp > 0) { // Only alive members gain exp
+                            member.exp += expToGive;
+                            member.totalExp += expToGive;
+                            
+                            // Check for level up
+                            const expRequired = player.party.getExpRequiredForLevelUp(member.level);
+                            if (member.exp >= expRequired) {
+                                player.party.levelUpMember(member);
+                            }
+                        }
+                    });
+                },
+
+                getExpRequiredForLevelUp: (level) => {
+                    return level * 10;
+                },
+
+                levelUpMember: (member) => {
+                    const expRequired = player.party.getExpRequiredForLevelUp(member.level);
+                    const rolledOverExp = Math.max(0, member.exp - expRequired);
+                    
+                    member.level++;
+                    member.exp = rolledOverExp;
+                    
+                    const hpBoost = 1; // Fixed +1 HP boost
+                    const defBoost = 1; // Fixed +1 DEF boost
+                    
+                    member.maxHp += hpBoost;
+                    member.hp = Math.min(member.hp + hpBoost, member.maxHp); // Heal slightly on level up
+                    member.def += defBoost;
+                    
+                    updateBattleLog(
+                        `<span class="friendly">${member.name}</span> has reached ` +
+                        `<span class="LV">Level ${member.level}</span>! All stats increased!`
+                    );
+                    
+                    const nextExpRequired = player.party.getExpRequiredForLevelUp(member.level);
+                    if (member.exp >= nextExpRequired) {
+                        player.party.levelUpMember(member);
+                    }
+                },
+
                 refreshPartyCount: () => {
                     document.getElementById("totalPartyMembers").innerText =
                         player.party.members.length.toLocaleString(undefined);
@@ -9164,7 +9473,7 @@
                         merchant.say("You've run out of space in your Pigeon Pouch!");
                         return;
                     }
-                    const sessionId = sessionStorage.getItem("vocaguardSessionId");
+                    const sessionId = sessionStorage.getItem("tardquestSID");
                     if (!sessionId) {
                         merchant.say("Can't buy pigeons without an ID, kid.");
                         return;
@@ -9173,7 +9482,7 @@
                     // Inform player we're attempting a server purchase
                     merchant.say("Hold on, checking the coop...");
 
-                    fetch('https://vocapepper.com:9601/api/pigeon/purchase', {
+                    fetch(`${TardAPI.API_BASE}/api/pigeon/purchase`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ session_id: sessionId })
@@ -9918,6 +10227,7 @@
                 }
 
                 playSFX('scream');
+                updateKillCounter();
                 pigeon.say(
                     'I WAS ONLY THE MESSENGERRRRRrrrrrrrr... *dies*',
                     true
@@ -10189,7 +10499,7 @@
 
                 const enemyAtNextPosition = roamingEnemies.getEnemyAt(nextX, nextY);
                 if (enemyAtNextPosition) {
-                    roamingEnemies.killEnemy(enemyAtNextPosition.id);
+                    roamingEnemies.removeEnemy(enemyAtNextPosition.id);
                     
                     const writableCellTypes = [
                         "floor", "rubble1", "rubble2", "crater", "tardspireBanner"
@@ -10466,7 +10776,7 @@
             enemies: {},
             maxEnemies: 6,
             nextId: 0,
-            enemiesKilledOnFloor: 0,
+            enemiesKilledTotal: 0,
             respawnAfterKills: 3,
 
             // Check if a position is in a boulder's path
@@ -10575,15 +10885,14 @@
 
             respawningEnabled: function() {
                 return (
-                    roamingEnemies.enemiesKilledOnFloor >=
+                    roamingEnemies.enemiesKilledTotal >=
                     roamingEnemies.respawnAfterKills
                 );
             },
 
             killEnemy: function(enemyId) {
                 roamingEnemies.removeEnemy(enemyId);
-                roamingEnemies.enemiesKilledOnFloor++;
-                updateMinimapFooter();
+                updateKillCounter();
             },
 
             isAt: function(x, y) {
@@ -10718,8 +11027,6 @@
 
             initialize: function() {
                 roamingEnemies.enemies = {};
-                roamingEnemies.enemiesKilledOnFloor = 0;
-                updateMinimapFooter();
 
                 for (let i = 0; i < roamingEnemies.maxEnemies; i++) {
                     roamingEnemies.spawnEnemy(true);
@@ -10779,8 +11086,10 @@
             floorCrackSlight: new Audio('audio/sfx/floorCrackSlight.mp3'),
             floorBreakScreamDie: new Audio('audio/sfx/floorBreakScreamDie.mp3'),
             healTile: new Audio('audio/sfx/healTile.mp3'),
+            healParty: new Audio('audio/sfx/healParty.mp3'),
             tromBone: new Audio('audio/sfx/tromBONE.mp3'),
             attacked: new Audio('audio/sfx/attacked.mp3'),
+            attackedParty: new Audio('audio/sfx/attackedParty.mp3'),
             battleStart: new Audio('audio/sfx/battleStart.mp3'),
             battleEnd: new Audio('audio/sfx/battleEnd.mp3'),
             ash: new Audio('audio/sfx/ash.mp3'),
@@ -10819,6 +11128,21 @@
         let currentBreathing = null;
         let floor = 1;
         let boulderMovementInterval = null;
+        const gravestoneData = {}; // keyed by floor: { x, y, entry }
+        const gravestoneMessages = [
+            "Attempted to pillage the TardSpire, but was pillaged in the ass by a refrigerator instead. RIP",
+            "Stayed up all night for this score. Worth it?",
+            "A shining example of refined incompetence.",
+            "You see a trom-BONE lodged sticking out of the ground. Musical genius, or a victim to amusia? No one will know.",
+            "They shit their pants... it was REAL bad.",
+            "They tried.",
+            "Rumors say they bore witness to the Pico's School incident...",
+            "This one was a registered Gex offender, straight up.",
+            "782 hours logged in Bubsy 3D. 'Nuff said.",
+            "Maybe they shouldn't have killed Erok...",
+            "This gravestone has been vandalized by teenagers. Those very teenagers now reside beneath this stone, due to unknown forces.",
+            "They tried to stay ALIVE on OPPOSITE DAY. Poor sucker..."
+        ];
 
         const MAP = new GameMap();
         MAP.setMinimap(document.getElementById("minimap"));
@@ -11012,6 +11336,7 @@
                 onExplode: function (x, y) {
                     merchant.isAlive = false;
                     merchant.isActiveOnFloor = false;
+                    updateKillCounter();
                     MAP.setCell(x, y, "bloodyCrater");
                     playSFX('scream');
                     merchant.say('AIEEEEEEEEEEEEEE!', true);
@@ -11040,6 +11365,7 @@
                 onExplode: function (x, y) {
                     gambler.isAlive = false;
                     gambler.isActiveOnFloor = false;
+                    updateKillCounter();
                     MAP.setCell(x, y, "bloodyCrater");
 
                     // Award between 50 and 100 BTC for the slaughter. I guess that's one way to win
@@ -11072,6 +11398,7 @@
                 onExplode: function (x, y) {
                     erok.isAlive = false;
                     erok.isActiveOnFloor = false;
+                    updateKillCounter();
                     MAP.setCell(x, y, "bloodyCrater");
                     playSFX('scream');
                     erok.say('i died oh noes', true);
@@ -11124,6 +11451,7 @@
                     menu.open("chest");
                 },
                 onExplode: function (x, y) {
+                    updateKillCounter();
                     MAP.setCell(x, y, "bloodyCrater");
 
                     // Calculate scaled BTC reward
@@ -11148,6 +11476,43 @@
                 canBeRolledOverByBouldingBall: false,
                 isVisible: function() {
                     return true;
+                },
+            },
+            gravestone: {
+                displayName: "Gravestone",
+                mapCharacter: "†",
+                canBeRolledOverByBouldingBall: false,
+                isSolid: false,
+                onEnter: function(x, y) {
+                    const data = gravestoneData[floor];
+                    if (!data || !data.entry) {
+                        console.warn("Gravestone entered but no data found", { floor, data });
+                        render();
+                        return;
+                    }
+
+                    const entry = data.entry || {};
+                    const name = entry.name || 'Unknown';
+                    const entryFloor = typeof entry.floor !== 'undefined' ? entry.floor : null;
+                    const entryLevel = typeof entry.level !== 'undefined' ? entry.level : null;
+                    const displayScore = `Floor ${entryFloor ?? '??'} - Level ${entryLevel ?? '??'}`;
+
+                    // choose gravestone message per-floor
+                    let message;
+                    if (data.gravestoneMessage) {
+                        message = data.gravestoneMessage;
+                    } else {
+                        message = randomEntry(gravestoneMessages);
+                        data.gravestoneMessage = message;
+                    }
+
+                    updateBattleLog(
+                        `<span class="friendly">${name}</span> - ` +
+                        `<span class="BTC">${displayScore}</span> - ` +
+                        `<span class="action">${message}</span>`
+                    );
+
+                    data.explored = true;
                 },
             },
         });
@@ -11187,6 +11552,7 @@
         let skipTitleScreen = false;
         let eatRatAnimationEnabled = true;
         let battleTransitionAnimationsEnabled = true;
+        let cachedLeaderboardEntries = null;
 
         // Taken from https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
         function shuffle(array) {
@@ -11241,6 +11607,97 @@
 
             console.error("Input list is not an array or object", { list });
             return null;
+        }
+        async function spawnGravestone() {
+            // Only spawn one per floor
+            if (gravestoneData[floor]) return;
+
+            if (typeof TardAPI === 'undefined' || typeof TardAPI.getLeaderboard !== 'function') {
+                console.warn("spawnGravestone: TardAPI.getLeaderboard not available - skipping spawn");
+                return;
+            }
+
+            try {
+                // Use cached entries if available, otherwise fetch
+                let entries = cachedLeaderboardEntries;
+                
+                if (!entries) {
+                    const res = await TardAPI.getLeaderboard({ force: false });
+                    if (!res || !res.success || !Array.isArray(res.leaderboard) || res.leaderboard.length === 0) {
+                        console.debug("spawnGravestone: leaderboard empty or failed", res);
+                        return;
+                    }
+                    entries = res.leaderboard;
+                    cachedLeaderboardEntries = entries; // Cache for future floors
+                }
+
+                if (!Array.isArray(entries) || entries.length === 0) return;
+
+                // Only consider leaderboard entries from the current floor
+                const floorEntries = entries.filter(e => {
+                    const entryFloor = Number(e.floor ?? e.floor_reached ?? e.max_floor ?? NaN);
+                    return Number.isFinite(entryFloor) && entryFloor === floor;
+                });
+
+                if (floorEntries.length === 0) {
+                    console.debug("spawnGravestone: no leaderboard entries for current floor", { floor, totalEntries: entries.length });
+                    return;
+                }
+
+                // Collate top scores per unique name (preserve full entry)
+                const topByName = {};
+                floorEntries.forEach(e => {
+                    const name = e.name || e.player || `Player${e.id ?? ''}`;
+                    const floorNum = Number(e.floor ?? NaN);
+                    const levelNum = Number(e.level ?? NaN);
+                    const existing = topByName[name];
+                    if (!existing) {
+                        topByName[name] = { ...e, name };
+                        return;
+                    }
+
+                    const existingFloor = Number(existing.floor ?? NaN);
+                    const existingLevel = Number(existing.level ?? NaN);
+
+                    // Prefer higher floor, break ties with higher level
+                    if (floorNum > existingFloor || (floorNum === existingFloor && levelNum > existingLevel)) {
+                        topByName[name] = { ...e, name };
+                    }
+                });
+                const uniqueEntries = Object.values(topByName);
+                if (uniqueEntries.length === 0) return;
+
+                // Choose random unique entry
+                const entry = randomEntry(uniqueEntries);
+
+                // Choose a coordinate - floor cell and not near player/boulder/merchant/gambler etc
+                const spawnCandidates = MAP.getEmptyCellCoordinates().filter(coord => {
+                    const distanceFromPlayer = Math.max(Math.abs(coord.x - player.x), Math.abs(coord.y - player.y));
+                    if (distanceFromPlayer < 4) return false;
+                    if (roamingEnemies.isInBoulderPath(coord.x, coord.y)) return false;
+                    // avoid NPC positions
+                    if (merchant.isAt(coord.x, coord.y) || gambler.isAt(coord.x, coord.y) || erok.isAt(coord.x, coord.y) || vampire.isAt(coord.x, coord.y) || pigeon.isAt(coord.x, coord.y)) return false;
+                    const cell = MAP.getCell(coord.x, coord.y);
+                    // require an ordinary floor cell
+                    return cell && (cell.type === 'floor' || cell.type === 'rubble1' || cell.type === 'rubble2' || cell.type === 'crater' || cell.type === 'bloodyCrater');
+                });
+
+                if (spawnCandidates.length === 0) return;
+
+                const chosenCell = randomEntry(spawnCandidates);
+                const { x, y } = chosenCell;
+                // place gravestone, store the meta data
+                MAP.setCell(x, y, 'gravestone');
+                gravestoneData[floor] = { x, y, entry, explored: false };
+                // update minimap and render
+                MAP.setEntities({});
+                MAP.refreshMinimap();
+                render();
+                
+            } catch (err) {
+                // If leaderboard fails, just ignore and move on
+                console.warn("Could not spawn gravestone: leaderboard fetch failed", err);
+            }
         }
 
         function generateMap() {
@@ -11308,19 +11765,65 @@
 
             // Initialize roaming enemies after all other map elements are placed
             roamingEnemies.initialize();
+            // spawn gravestone for this floor
+            spawnGravestone();
 
-            document.getElementById('minimapHeader').innerText =
-                `Dungeon Floor ${floor}`;
+            document.getElementById('dungeonFloor').textContent =
+                floor.toLocaleString(undefined);
 
-            updateMinimapFooter();
             vampire.initialize();
         }
 
-        function updateMinimapFooter() {
-            const $minimapFooter = document.getElementById('minimapFooter');
-            if ($minimapFooter) {
-                $minimapFooter.textContent = `Monsters Killed: ${roamingEnemies.enemiesKilledOnFloor}`;
+        function updateKillCounter(initialValue) {
+            // Automatically update the counter by 1 unless an override is given
+            roamingEnemies.enemiesKilledTotal = Number.isInteger(initialValue)
+                ? initialValue
+                : roamingEnemies.enemiesKilledTotal + 1;
+
+            const $killCounter = document.getElementById('killCounter');
+            if (! $killCounter) {
+                console.error("The kill counter element doesn't exist");
+                return;
             }
+
+            const total = roamingEnemies.enemiesKilledTotal;
+            $killCounter.textContent = total.toLocaleString(undefined);
+
+            const message = (function () {
+                switch (total) {
+                    case 69:
+                        return "Nice";
+                    case 420:
+                        return "dude weed kills lmao";
+                    case 1337:
+                    case 31337:
+                        return "Literal hacker";
+                    case 5555:
+                        return "You daft punk";
+                    case 6969:
+                        return "Double nice";
+                    case 42069:
+                        return "Party time";
+                }
+
+                const totalString = total.toString();
+                if (totalString.match(/^(\d)\1+$/)) {
+                    switch (totalString.length) {
+                        case 2: return "Nice dubs!";
+                        case 3: return "Sick trips!";
+                        case 4: return "Quality quads!!";
+                        case 5: return "Quixotic quints!!!";
+                        default: return "Check 'em!";
+                    }
+                }
+
+                return "Total Kills";
+            }());
+
+            $killCounter.setAttribute(
+                'data-tooltipHtml',
+                `<div class="genericTooltip">${message}</div>`
+            );
         }
 
         let autoDicerollEnabled = false;
@@ -11553,6 +12056,20 @@
                     mapCharacter: " ", // Handled by the #minimap .boulder class
                     type: "boulder",
                 };
+            }
+
+            if (gravestoneData[floor]) {
+                const g = gravestoneData[floor];
+                if (g.explored && (g.x !== player.x || g.y !== player.y)) {
+                    entities.gravestone = {
+                        x: g.x,
+                        y: g.y,
+                        displayName: "Gravestone",
+                        isVisible: true,
+                        mapCharacter: "†",
+                        type: "gravestone",
+                    };
+                }
             }
 
             Object.values(roamingEnemies.enemies).forEach(enemy => {
@@ -12321,9 +12838,10 @@
                 playerAttackCooldown = true;
                 animAsh(currentEnemy.id, () => {
                     if (currentEnemy.isWild && currentEnemy.id !== "vampire") {
-                        roamingEnemies.enemiesKilledOnFloor++;
-                        updateMinimapFooter();
+                        updateKillCounter();
                     }
+
+                    player.party.giveExperience();
                     
                     if (currentEnemy.id === "mimic") {
                         updateBattleLog(`The <span class="enemy">MIMIC</span> has been defeated! You find <span class="BTC">₿ ${currentEnemy.bitcoins}</span> in its remains!`);
@@ -12417,9 +12935,12 @@
             const ally = randomEntry(player.party.get());
             const target = ally && Math.random() < 0.5 ? "ally" : "player";
 
-            target === "ally"
-                ? ally.hp = Math.max(ally.hp - totalDamage, 0)
-                : player.damage(totalDamage);
+            if (target === "ally") {
+                ally.hp = Math.max(ally.hp - totalDamage, 0);
+                playSFX('attackedParty');
+            } else {
+                player.damage(totalDamage);
+            }
 
             const targetLine = target === "ally"
                 ? `your <span class="friendly">${ally.name}</span>`
@@ -13015,7 +13536,8 @@
                             currentEnemy.id,
                             currentEnemy.name,
                             enemyHp,
-                            maxEnemyHp
+                            maxEnemyHp,
+                            playerMessage
                         );
                         updateBattleLog(
                             `The <span class="friendly">${currentEnemy.name}` +
@@ -13815,6 +14337,7 @@
             generateMap();
             animTorchEnd();
             PigeonMessaging.ensurePolling();
+            TardAPI.updateProgress();
         }
 
         document.getElementById("game").addEventListener("animationend", e => {
@@ -16653,6 +17176,7 @@
 
         function hideTitleScreen() {
             music.stop();
+            TardAPI.createSession();
             PigeonMessaging.ensurePolling();
 
             // @TODO Refactor this since it's duplicated in gamepad.js
