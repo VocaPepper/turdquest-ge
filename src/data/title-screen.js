@@ -892,6 +892,24 @@ TITLE_SCREEN.content = {
             $startGameButton.onclick = onStartGameClick;
         };
 
+        // API features toggle
+        const apiEnabled = typeof TardAPI !== 'undefined' && TardAPI.apiFeaturesEnabled;
+        const $apiToggle = document.createElement("label");
+        $apiToggle.id = "apiToggle";
+        $apiToggle.innerHTML = `
+            <input type="checkbox" ${apiEnabled ? 'checked' : ''}>
+            <span class="slider"></span>
+            <span class="label">Online Features</span>
+        `;
+        $apiToggle.addEventListener("click", (e) => e.stopPropagation());
+        const $checkbox = $apiToggle.querySelector("input");
+        $checkbox.addEventListener("change", () => {
+            if (typeof TardAPI !== 'undefined') {
+                TardAPI.setApiFeaturesEnabled($checkbox.checked);
+            }
+        });
+        $startGameButton.append($apiToggle);
+
         $content.append($startGameButton);
 
         const $spireScene = document.createElement("div");
